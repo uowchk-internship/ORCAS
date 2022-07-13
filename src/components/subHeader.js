@@ -42,7 +42,7 @@ export default function SubHeader() {
                             <li><a href="https://www.uowchk.edu.hk/current-students/">Current students</a></li>
                             <li><a href="https://www.uowchk.edu.hk/current-students/student-learning-support-system/"></a> Students
                                 Learning Support System</li>
-                            <li>ORCAS</li>
+                            <li>ORCAS1</li>
                         </ul>
                     </div>
                     <div class="page-navigator__list page-navigator__list--pages">
