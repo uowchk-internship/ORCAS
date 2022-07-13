@@ -182,16 +182,6 @@ const Footer = () => {
                             <div className="uw-search--form-wrapper">
                                 <form className="uw-search--form" action="https://www.uowchk.edu.hk/search/">
                                     <div className="searchHolder search-hk">
-                                        <div>
-                                            <input
-                                                type="text"
-                                                name="query"
-                                                placeholder="Search UOW"
-                                                value=""
-                                                aria-label="Search UOW"
-                                                autocomplete="off"
-                                            />
-                                        </div>
 
                                         <div className="linksHolder">
                                             <button

@@ -1,10 +1,11 @@
+
 const Header = () => {
     return (
         <>
-            <meta charset="utf-8" />
-            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <meta charSet="utf-8" />
+            <meta httpEquiv="x-ua-compatible" content="ie=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <meta http-equiv="last-modified" content="2021-05-11" />
+            <meta httpEquiv="last-modified" content="2021-05-11" />
             <meta property="og:type" content="website" />
             <meta
                 property="og:title"
@@ -75,7 +76,7 @@ const Header = () => {
                 defer=""
                 src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
                 integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
-                crossorigin="anonymous"
+                crossOrigin="anonymous"
             ></script>
             <script src="https://use.fortawesome.com/dc5d3cc4.js"></script>
             <link
@@ -109,7 +110,7 @@ const Header = () => {
 
                 <div className="cookies-notice" role="contentinfo">
                     <div>
-                        <div className="notice" tabindex="1">
+                        <div className="notice" tabIndex="1">
                             <p>
                                 We use cookies to improve your experience on our site and to show you
                                 personalised advertising. To find out more, read our
@@ -118,13 +119,13 @@ const Header = () => {
                                     target="_blank"
                                     title="Privacy policy and cookie policy"
                                     href="https://www.uowchk.edu.hk/about-us/legal-information"
-                                    tabindex="1"
+                                    tabIndex="1"
                                 >privacy policy and cookie policy</a
                                 >
                             </p>
                         </div>
                         <div>
-                            <button className="button" tabindex="1">OK, THANKS</button>
+                            <button className="button" tabIndex="1">OK, THANKS</button>
                         </div>
                     </div>
                 </div>
@@ -132,13 +133,13 @@ const Header = () => {
                 <div className="emergencynotice" aria-live="assertive"></div>
 
                 <header className="uw-header">
-                    <a className="skip-link" href="#main-content" tabindex="1" role="navigation"
+                    <a className="skip-link" href="#main-content" tabIndex="1" role="navigation"
                     >Skip to Content</a
                     >
                     <div className="uw-header-top">
                         <div className="uw-header-container">
                             <div className="uw-header-logo">
-                                <a href="https://www.uowchk.edu.hk/" aria-label="UOW College Hong Kong home page" tabindex="2">
+                                <a href="https://www.uowchk.edu.hk/" aria-label="UOW College Hong Kong home page" tabIndex="2">
                                     <img
                                         className="logo-regular logo-regular-white"
                                         src="https://www.uowchk.edu.hk/site-assets/logos/uow-college-hong-kong/uowchk-logo-white.svg"
@@ -161,7 +162,7 @@ const Header = () => {
                                 <nav className="uw-top-menu">
                                     <ul className="top-menu">
                                         <li className="top-nav-order-1">
-                                            <a className="btn-nav btn-search" href="" tabindex="3"
+                                            <a className="btn-nav btn-search" href="" tabIndex="3"
                                             ><span>Search</span></a
                                             >
                                         </li>
@@ -170,12 +171,12 @@ const Header = () => {
                                             <a
                                                 className="btn-nav btn-students"
                                                 href="https://www.uowchk.edu.hk/current-students/"
-                                                tabindex="5"
+                                                tabIndex="5"
                                             ><span>Current </span>Students</a
                                             >
                                         </li>
                                         <li className="top-nav-order-3">
-                                            <a className="btn-nav btn-staff" href="https://www.uowchk.edu.hk/staff/" tabindex="6"
+                                            <a className="btn-nav btn-staff" href="https://www.uowchk.edu.hk/staff/" tabIndex="6"
                                             >Staff</a
                                             >
                                         </li>
@@ -211,7 +212,7 @@ const Header = () => {
                                                         <ul>
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/about-us/message-from-the-president/"
                                                                 >
                                                                     Message from the President
@@ -219,14 +220,14 @@ const Header = () => {
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/about-us/college-structure/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/about-us/college-structure/">
                                                                     College Structure
                                                                 </a>
                                                             </li>
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/about-us/about-the-faculties/"
                                                                 >
                                                                     About the faculties
@@ -235,7 +236,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/about-us/about-university-of-wollongong-australia/"
                                                                 >
                                                                     About UOW Australia
@@ -244,7 +245,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/study-at-uowchk/campuses-and-facilities/"
                                                                 >
                                                                     Campuses and facilities
@@ -253,7 +254,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/about-us/commitment-to-quality/"
                                                                 >
                                                                     Commitment to quality
@@ -261,27 +262,27 @@ const Header = () => {
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/about-us/staff-directory/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/about-us/staff-directory/">
                                                                     Staff Directory
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/contact-us/"> Contact us </a>
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/contact-us/"> Contact us </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/working-with-us/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/working-with-us/">
                                                                     Working with us
                                                                 </a>
                                                             </li>
                                                         </ul>
 
-                                                        <a href="https://www.uowchk.edu.hk/about-us/" className="subnav-cta" tabindex="-1"
+                                                        <a href="https://www.uowchk.edu.hk/about-us/" className="subnav-cta" tabIndex="-1"
                                                         >About us
                                                         </a>
 
-                                                        <button className="close-nav" tabindex="-1">Close</button>
+                                                        <button className="close-nav" tabIndex="-1">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -300,7 +301,7 @@ const Header = () => {
                                                         <ul>
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/study-at-uowchk/find-programmes/international-language-proficiency-tests/"
                                                                 >
                                                                     Language tests
@@ -309,7 +310,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/study-at-uowchk/find-programmes/centre-for-lifelong-learning/"
                                                                 >
                                                                     Short courses
@@ -318,7 +319,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/current-students/useful-links/"
                                                                 >
                                                                     Students useful links
@@ -327,7 +328,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/current-students/download-forms/"
                                                                 >
                                                                     Students download forms
@@ -336,7 +337,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/academic-calendar-and-important-dates/"
                                                                 >
                                                                     Academic calendar
@@ -345,7 +346,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uow.edu.au/library/"
                                                                 >
                                                                     UOW library
@@ -354,7 +355,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/study-at-uowchk/campuses-and-facilities/uowchk-libraries/"
                                                                 >
                                                                     UOWCHK libraries
@@ -363,7 +364,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/current-students/adverse-weather-arrangements/"
                                                                 >
                                                                     Adverse Weather Arrangement
@@ -371,7 +372,7 @@ const Header = () => {
                                                             </li>
                                                         </ul>
 
-                                                        <button className="close-nav" tabindex="-1">Close</button>
+                                                        <button className="close-nav" tabIndex="-1">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -384,14 +385,14 @@ const Header = () => {
                                                         <h2>學院課程</h2>
                                                         <ul>
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21870/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21870/">
                                                                     選擇原因
                                                                 </a>
                                                             </li>
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/s-21476/s-21868/find-programmes/"
                                                                 >
                                                                     課程資訊
@@ -400,7 +401,7 @@ const Header = () => {
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21538/#d.en.109298"
                                                                 >
                                                                     入學要求
@@ -408,25 +409,25 @@ const Header = () => {
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21538/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21538/">
                                                                     申請方法
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21535/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21535/">
                                                                     學費、政府資助及獎學金
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21873/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21873/">
                                                                     校舍及設施
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21486/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21486/">
                                                                     聯絡我們
                                                                 </a>
                                                             </li>
@@ -435,11 +436,11 @@ const Header = () => {
                                                         <a
                                                             href="https://www.uowchk.edu.hk/s-21476/s-21868/"
                                                             className="subnav-cta"
-                                                            tabindex="-1"
+                                                            tabIndex="-1"
                                                         >學院課程
                                                         </a>
 
-                                                        <button className="close-nav" tabindex="-1">Close</button>
+                                                        <button className="close-nav" tabIndex="-1">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -452,38 +453,38 @@ const Header = () => {
                                                         <h2>關於我們</h2>
                                                         <ul>
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21720/s-21816/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21720/s-21816/">
                                                                     校長的話
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/about-us/college-structure/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/about-us/college-structure/">
                                                                     學院架構
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21720/s-21487/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21720/s-21487/">
                                                                     學院簡介
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21720/s-22391/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21720/s-22391/">
                                                                     澳洲伍倫貢大學
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21873/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21868/s-21873/">
                                                                     校舍及設施
                                                                 </a>
                                                             </li>
 
                                                             <li>
                                                                 <a
-                                                                    tabindex="-1"
+                                                                    tabIndex="-1"
                                                                     href="https://www.uowchk.edu.hk/about-us/commitment-to-quality/"
                                                                 >
                                                                     教育質素承諾
@@ -491,19 +492,19 @@ const Header = () => {
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21720/s-21818/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21720/s-21818/">
                                                                     教職員名錄
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21486/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/s-21476/s-21486/">
                                                                     聯絡我們
                                                                 </a>
                                                             </li>
 
                                                             <li>
-                                                                <a tabindex="-1" href="https://www.uowchk.edu.hk/working-with-us/">
+                                                                <a tabIndex="-1" href="https://www.uowchk.edu.hk/working-with-us/">
                                                                     工作機會
                                                                 </a>
                                                             </li>
@@ -512,11 +513,11 @@ const Header = () => {
                                                         <a
                                                             href="https://www.uowchk.edu.hk/s-21476/s-21720/"
                                                             className="subnav-cta"
-                                                            tabindex="-1"
+                                                            tabIndex="-1"
                                                         >關於我們
                                                         </a>
 
-                                                        <button className="close-nav" tabindex="-1">Close</button>
+                                                        <button className="close-nav" tabIndex="-1">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
