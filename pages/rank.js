@@ -1,6 +1,8 @@
-import Header from "../src/components/header"
-import SubHeader from "../src/components/subheader"
-import Footer from "../src/components/footer"
+import Header from "../src/components/header";
+import SubHeader from "../src/components/subheader";
+import Footer from "../src/components/footer";
+
+import RankPage from "../src/components/student/rank";
 
 export default function Rank() {
   return (
@@ -8,9 +10,11 @@ export default function Rank() {
       <Header />
       <SubHeader />
 
-      <h1>Rank page</h1>
-      
+      <div className="mainContent">
+        <RankPage />
+      </div>
+
       <Footer />
     </div>
-  )
+  );
 }
