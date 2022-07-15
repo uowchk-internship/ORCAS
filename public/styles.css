@@ -510,3 +510,22 @@ svg:not(:root).svg-inline--fa {
     opacity: 1;
   }
 }
+
+/* TeacherPage.style */
+
+#left-col{
+  float: left;
+  padding-right: 20px;
+}
+
+#select-part{
+  font-family: sans-serif;
+  font-style: normal;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h1.checklink{
+  color:#ED0A00;
+  font-size: 2.5em;
+}
