@@ -93,12 +93,13 @@ export default function UploadComponent() {
       </form>
 
       <Modal
+        withCloseButton={false}
         size="xl"
         opened={showPopup}
         onClose={() => setShowPopup(false)}
       >
         <UploadResultSuccess />
-        <br/><br />
+        <br /><br />
         <UploadResultFail />
       </Modal>
     </>

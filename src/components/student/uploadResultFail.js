@@ -7,7 +7,7 @@ export default function UploadResultFail() {
             <div style={{ textAlign: 'center' }}>
 
                 <Group position="center">
-                    <Image src="/cancel.png" width={100} />
+                    <Image src="/images/cancel.png" width={100} />
                 </Group>
 
                 <h1 style={{ fontSize: 50 }}>

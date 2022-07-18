@@ -534,3 +534,9 @@ h1.checklink {
 .rdtNext {
   width: 15%;
 }
+
+[type=checkbox]+label,
+[type=radio]+label {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

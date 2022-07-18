@@ -7,7 +7,7 @@ export default function UploadResultSuccess() {
             <div style={{ textAlign: 'center' }}>
 
                 <Group position="center">
-                    <Image src="/checked.png" width={100} />
+                    <Image src="/images/checked.png" width={100} />
                 </Group>
                 <h1 style={{ fontSize: 50 }}>Upload Succeeded</h1>
 
