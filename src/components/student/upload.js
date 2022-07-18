@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import Datetime from 'react-datetime';
-import { Chips, Chip, createStyles, Button } from '@mantine/core';
+import { Chips, Chip, createStyles, Button, Modal } from '@mantine/core';
+
+import UploadResultFail from './uploadResultFail';
+import UploadResultSuccess from './uploadResultSuccess';
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   iconWrapper: {
@@ -21,8 +24,12 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 export default function UploadComponent() {
   const { classes } = useStyles();
 
+  const [showPopup, setShowPopup] = useState(false);
+
+  //Form values
   const [subjects, setSubjects] = useState([])
   const [type, setType] = useState([])
+
 
 
   return (
@@ -74,17 +81,26 @@ export default function UploadComponent() {
           Please double check link is valid before submission.
         </p>
 
-        <div style={{ textAlign: "center"}}>
-          <Button style={{ backgroundColor: "#001641", color: "#ffffff" ,borderRadius: 5}}
+        <div style={{ textAlign: "center" }}>
+          <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
             position="center"
-            size="md">
+            size="md"
+            onClick={() => setShowPopup(true)}>
             Submit
           </Button>
         </div>
-
-        <br/>
-        <br/>
+        <br /><br />
       </form>
+
+      <Modal
+        size="xl"
+        opened={showPopup}
+        onClose={() => setShowPopup(false)}
+      >
+        <UploadResultSuccess />
+        <br/><br />
+        <UploadResultFail />
+      </Modal>
     </>
   );
 }

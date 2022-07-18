@@ -16,7 +16,6 @@ export default function Rank() {
 
         <section className="page-form grid-container">
           <RankPage />
-
         </section>
       </div>
 
