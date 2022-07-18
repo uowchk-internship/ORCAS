@@ -101,8 +101,17 @@ export default function SubHeader(props) {
                 </a>
               </li>
               <li>
-                ORCAS
+                {location === "/" ? "ORCAS" :
+                  <Link href="/">
+                    ORCAS
+                  </Link>
+                }
               </li>
+              {location == "/" ? "" :
+                <li>
+                  {(location.charAt(1).toUpperCase() + location.substring(2, location.length))}
+                </li>
+              }
             </ul>
           </div>
           <div className="page-navigator__list page-navigator__list--pages">
@@ -140,7 +149,7 @@ export default function SubHeader(props) {
           <div className="grid-x align-left">
             <div className="uw-masthead__content">
               <h1 className="cell js-scroll-reveal--left uw-masthead__title uw-masthead__subbrand--title">
-                ORCAS
+                {location == "/" ? "ORCAS" : (location.charAt(1).toUpperCase() + location.substring(2, location.length))}
               </h1>
             </div>
           </div>
