@@ -141,11 +141,11 @@ button:focus, button:hover {
 
 /* for Search Results */
 #result-container {
-    margin-top: 50px;
+    margin-top: 10px;
     background-color: #e9e9e9;
     width: 100%;
     border: none;
-    padding: 20px 10px 20px;
+    padding: 5px 10px 20px;
 }
 
 .result {

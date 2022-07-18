@@ -1519,6 +1519,31 @@ screen and (min-width:48em) {
 .icon--chevron-left-after::after {
     content: ""
 }
+.icon--chevrons-right::before {
+    content: ""
+}
+
+.icon--chevrons-right-after::before {
+    display: none;
+    content: none
+}
+
+.icon--chevrons-right-after::after {
+    content: ""
+}
+
+.icon--chevrons-left::before {
+    content: ""
+}
+
+.icon--chevrons-left-after::before {
+    display: none;
+    content: none
+}
+
+.icon--chevrons-left-after::after {
+    content: ""
+}
 
 .icon--chevron-down::before {
     content: ""
@@ -3201,12 +3226,12 @@ textarea {
     overflow: auto
 }
 
-[type=checkbox],
+/* [type=checkbox],
 [type=radio] {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0
-}
+} */
 
 [type=number]::-webkit-inner-spin-button,
 [type=number]::-webkit-outer-spin-button {
@@ -14834,14 +14859,14 @@ screen and (min-width:48em) {
     }
 }
 
-input[type=radio] {
+/* input[type=radio] {
     opacity: 0;
     position: absolute;
     margin: .125rem 0;
     border-radius: 99.9%
-}
+} */
 
-input[type=radio]+label {
+/* input[type=radio]+label {
     position: relative;
     padding-left: 1.5625rem;
     padding-top: .1875rem;
@@ -14884,7 +14909,7 @@ input[type=radio]:checked+label:after {
     -webkit-transition: opacity .2s ease-in-out;
     transition: opacity .2s ease-in-out;
     border-radius: 99.99%
-}
+} */
 
 select option:disabled,
 select option[value=""],
@@ -32698,7 +32723,7 @@ screen and (min-width:48em) {
     right: 0;
     top: 0;
     bottom: 0;
-    right: 10px
+    right: -12px
 }
 
 @media (max-width:1024px) {

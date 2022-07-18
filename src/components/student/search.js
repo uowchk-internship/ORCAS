@@ -1,4 +1,4 @@
-import { Chips, Chip, createStyles, Group, Image } from '@mantine/core';
+import { Chips, Chip, createStyles, Image, Accordion } from '@mantine/core';
 import { useState } from 'react'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
@@ -20,7 +20,9 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 export default function Search() {
     const { classes } = useStyles();
 
-    const [chosenTab, setChosenTab] = useState("")
+    const [chosenTab, setChosenTab] = useState(["journals", "artsHumanities", "socialScience"])
+    const [yearFilter, setYearFilter] = useState("all")
+    const [subjectFilter, setSubjectFilter] = useState(["all","scienceTechnology","artsHumanities","socialScience","business","others"])
 
     return (
         <>
@@ -35,52 +37,55 @@ export default function Search() {
             </section>
 
 
-            <Group style={{ padding: 10 }}>
+            <div style={{ padding: 10 }}>
                 <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
                     <Chip value="journals">Journals Articles (100)</Chip>
                     <Chip value="artsHumanities">Newspapers Articles (100)</Chip>
                     <Chip value="socialScience">Social Science (100)</Chip>
                 </Chips>
-
-            </Group>
+            </div>
 
 
             <section className="search-body">
                 <div className="grid-container">
                     <div className="grid-x grid-margin-x">
                         <div className="uw-search--filter cell large-3" >
-                            <h2>Filter</h2>
+                            <h2 style={{ fontSize: 40 }}>Filter</h2>
                             <hr id="filter-hr" />
 
-                            <div>
-                                <div id="filter-arrow-1" className="filter-arrow"></div>
-                                <p id="publicationYear">Publication Year</p>
+                            <Accordion multiple initialItem={0}>
+                                <Accordion.Item label="Publication Year">
+                                    <div>
+                                        <Chips value={yearFilter} onChange={setYearFilter} size="md" radius="sm" classNames={classes} >
+                                            <Chip value="all">All</Chip>
+                                            <Chip value="6year">Last 6 Years</Chip>
+                                            <Chip value="3year">Last 3 Years</Chip>
+                                            <Chip value="1year">Last Year</Chip>
+                                        </Chips>
+                                    </div>
+                                </Accordion.Item>
+                            </Accordion>
 
-                                <ul id="checkbox-dropdown-list-1">
-                                    <li><input type="checkbox" /><span className="conT">All</span></li>
-                                    <li><input type="checkbox" /><span className="conT">Last 6 Years</span></li>
-                                    <li><input type="checkbox" /><span className="conT">Last 3 Years</span></li>
-                                    <li><input type="checkbox" /><span className="conT">Last Year</span></li>
-                                </ul>
-                            </div>
+                            <Accordion multiple  initialItem={0}>
+                                <Accordion.Item label="Subject" >
+                                    <div>
+                                        <Chips value={subjectFilter} onChange={setSubjectFilter} multiple size="md" radius="sm" classNames={classes} >
+                                            <Chip value="all">All</Chip>
+                                            <Chip value="scienceTechnology">Science & Technology</Chip>
+                                            <Chip value="artsHumanities">Arts & Humanities</Chip>
+                                            <Chip value="socialScience">Social Science</Chip>
+                                            <Chip value="business">Business</Chip>
+                                            <Chip value="others">Others</Chip>
+                                        </Chips>
+                                    </div>
+                                </Accordion.Item>
 
-                            <div>
-                                <div id="filter-arrow-2" className="filter-arrow"
-                                    onClick="dropdown('filter-arrow-2', 'checkbox-dropdown-list-2')"></div>
-                                <p id="subject">Subject</p>
-
-                                <ul id="checkbox-dropdown-list-2">
-                                    <li><input type="checkbox" /><span className="conT">Arts & Humanities</span></li>
-                                    <li><input type="checkbox" /><span className="conT">Science & Technology</span></li>
-                                    <li><input type="checkbox" /><span className="conT">Business</span></li>
-                                    <li><input type="checkbox" /><span className="conT">Social Science</span></li>
-                                </ul>
-                            </div>
+                            </Accordion>
 
                         </div>
 
                         <div className="uw-search--results cell large-9" >
-                            <h2>Search Results</h2>
+                            <h2 style={{ fontSize: 40 }}>Search Results</h2>
 
                             <div id="result-container">
                                 <div className="row result" id="result-1">
@@ -138,7 +143,6 @@ export default function Search() {
                                             <span class="icon--chevron-right"></span>
                                         </a>
                                     </li>
-
 
                                 </ul>
                             </nav>
