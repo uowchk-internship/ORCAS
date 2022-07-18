@@ -529,3 +529,7 @@ h1.checklink{
   color:#ED0A00;
   font-size: 2.5em;
 }
+
+.rdtPrev, .rdtNext{
+  width:15%;
+}

@@ -2,7 +2,8 @@ import Header from "../src/components/header";
 import SubHeader from "../src/components/subHeader";
 import Footer from "../src/components/footer";
 
-import RankPage from "../src/components/student/rank";
+import UploadPage from "../src/components/student/upload";
+import BackButton from "../src/components/backButton";
 
 export default function Upload() {
   return (
@@ -11,7 +12,11 @@ export default function Upload() {
       <SubHeader path="/upload" />
 
       <div className="mainContent">
-        <RankPage />
+        <BackButton />
+
+        <section className="page-form grid-container">
+          <UploadPage />
+        </section>
       </div>
 
       <Footer />

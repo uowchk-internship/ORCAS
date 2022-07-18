@@ -9,9 +9,12 @@ export default function Rank() {
     <div>
       <Header />
       <SubHeader path="/rank" />
-
+      
       <div className="mainContent">
-        <RankPage />
+        <section className="page-form grid-container">
+          <RankPage />
+
+        </section>
       </div>
 
       <Footer />

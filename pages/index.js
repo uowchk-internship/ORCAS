@@ -8,8 +8,14 @@ export default function Home() {
       <Header />
       <SubHeader path="/" />
 
-      <h1>Hello</h1>
-      
+      <div className="mainContent">
+        <section className="page-form grid-container">
+
+          <h1>Hello</h1>
+        </section>
+      </div>
+
+
       <Footer />
     </div>
   )

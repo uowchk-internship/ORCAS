@@ -9,9 +9,11 @@ export default function Upload() {
     <div>
       <Header />
       <SubHeader path="/teacher" />
-
       <div className="mainContent">
+        <section className="page-form grid-container">
+
         <TeacherPage />
+        </section>
       </div>
 
       <Footer />

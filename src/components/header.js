@@ -119,9 +119,9 @@ const Header = () => {
                                     target="_blank"
                                     title="Privacy policy and cookie policy"
                                     href="https://www.uowchk.edu.hk/about-us/legal-information"
-                                    tabIndex="1"
-                                >privacy policy and cookie policy</a
-                                >
+                                    tabIndex="1">
+                                    privacy policy and cookie policy
+                                </a>
                             </p>
                         </div>
                         <div>
@@ -133,9 +133,9 @@ const Header = () => {
                 <div className="emergencynotice" aria-live="assertive"></div>
 
                 <header className="uw-header">
-                    <a className="skip-link" href="#main-content" tabIndex="1" role="navigation"
-                    >Skip to Content</a
-                    >
+                    <a className="skip-link" href="#main-content" tabIndex="1" role="navigation">
+                        Skip to Content
+                    </a>
                     <div className="uw-header-top">
                         <div className="uw-header-container">
                             <div className="uw-header-logo">
@@ -177,8 +177,7 @@ const Header = () => {
                                         </li>
                                         <li className="top-nav-order-3">
                                             <a className="btn-nav btn-staff" href="https://www.uowchk.edu.hk/staff/" tabIndex="6"
-                                            >Staff</a
-                                            >
+                                            >Staff</a>
                                         </li>
 
                                         <li className="mobile-menu-trigger">
@@ -199,13 +198,11 @@ const Header = () => {
                                                 <a
                                                     className="uw-main-menu-item uw-has-submenu"
                                                     href="https://www.uowchk.edu.hk/study-at-uowchk/"
-                                                >Study at UOWCHK</a
-                                                >
+                                                >Study at UOWCHK</a>
                                             </li>
                                             <li>
                                                 <a className="uw-main-menu-item uw-has-submenu" href="https://www.uowchk.edu.hk/about-us/"
-                                                >About us</a
-                                                >
+                                                >About us</a>
                                                 <div className="uw-main-submenu">
                                                     <div className="grid-container">
                                                         <h2>About us</h2>
@@ -288,13 +285,11 @@ const Header = () => {
                                             </li>
                                             <li className="">
                                                 <a href="https://www.uowchk.edu.hk/news--events/" className="uw-main-menu-item"
-                                                ><span>News &amp; Events</span></a
-                                                >
+                                                ><span>News &amp; Events</span></a>
                                             </li>
                                             <li>
                                                 <a className="uw-main-menu-item uw-has-submenu" href=""
-                                                >Quick Links</a
-                                                >
+                                                >Quick Links</a>
                                                 <div className="uw-main-submenu">
                                                     <div className="grid-container">
                                                         <h2>Quick Links</h2>
@@ -378,8 +373,7 @@ const Header = () => {
                                             </li>
                                             <li>
                                                 <a className="uw-main-menu-item uw-has-submenu" href=""
-                                                >學院課程</a
-                                                >
+                                                >學院課程</a>
                                                 <div className="uw-main-submenu">
                                                     <div className="grid-container">
                                                         <h2>學院課程</h2>
@@ -446,8 +440,7 @@ const Header = () => {
                                             </li>
                                             <li>
                                                 <a className="uw-main-menu-item uw-has-submenu" href=""
-                                                >關於我們</a
-                                                >
+                                                >關於我們</a>
                                                 <div className="uw-main-submenu">
                                                     <div className="grid-container">
                                                         <h2>關於我們</h2>

@@ -11,7 +11,9 @@ export default function Search() {
       <SubHeader path="/search" />
 
       <div className="mainContent">
-        <RankPage />
+        <section className="page-form grid-container">
+          <RankPage />
+        </section>
       </div>
 
       <Footer />
