@@ -1,68 +1,89 @@
+import { useState } from 'react'
 import Datetime from 'react-datetime';
+import { Chips, Chip, createStyles, Button } from '@mantine/core';
+
+const useStyles = createStyles((theme, _params, getRef) => ({
+  iconWrapper: {
+    ref: getRef('iconWrapper'),
+  },
+
+  checked: {
+    backgroundColor: `#001641 !important`,
+    color: theme.white,
+
+    [`& .${getRef('iconWrapper')}`]: {
+      color: theme.white,
+    },
+  },
+}));
+
 
 export default function UploadComponent() {
-  // const [year, setYear] = useState(1990);
+  const { classes } = useStyles();
+
+  const [subjects, setSubjects] = useState([])
+  const [type, setType] = useState([])
+
 
   return (
     <>
       <form>
-        <label for="se">Student Email:</label>
+        <label for="se">Student Email: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="se" name="ses" />
 
-        <label for="topic">Topic:</label>
+        <label for="topic">Topic: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="topic" name="topic" />
 
         <label for="author">Author:</label>
         <input type="text" id="author" name="author" />
 
-        <label for="datepicker">Publish year:</label>
+        <label for="datepicker">Publish year: <span style={{ color: "#ED0A00" }}>*</span></label>
         <Datetime
           initialViewMode="years"
           dateFormat="YYYY" timeFormat={false}
         />
-        {/* <input type="text" class="form-control" name="datepicker" id="datepicker" /> */}
 
         <label for="publisher">Publisher:</label>
         <input type="text" id="publisher" name="publisher" />
-        <p>
-          Subject: (you can choose more than one)<span style={{ color: "#ED0A00" }}>*</span>
-        </p>
 
-        <input type="checkbox" id="SnT" name="SnT" value="SnT" />
-        <label for="SnT"> Science & Technology</label>
+        <label >Subject: (you can choose more than one) <span style={{ color: "#ED0A00" }}>*</span></label>
 
-        <input type="checkbox" id="AnH" name="AnH" value="AnH" />
-        <label for="AnH"> Arts & Humanities</label>
+        <Chips value={subjects} onChange={setSubjects} multiple size="md" radius="sm" classNames={classes}>
+          <Chip value="scienceTechnology">Science & Technology</Chip>
+          <Chip value="artsHumanities">Arts & Humanities</Chip>
+          <Chip value="socialScience">Social Science</Chip>
+          <Chip value="business">Business</Chip>
+          <Chip value="others">Others</Chip>
+        </Chips>
+        <br />
 
-        <input type="checkbox" id="SocialScience" name="SocialScience" value="SocialScience" />
-        <label for="SocialScience"> Social Science</label>
+        <label >Resources Type: (you can choose more than one) <span style={{ color: "#ED0A00" }}>*</span></label>
+        <Chips value={type} onChange={setType} multiple size="md" radius="sm" classNames={classes}>
+          <Chip value="journal">Journal Article</Chip>
+          <Chip value="newspaper">Newspaper Article</Chip>
+          <Chip value="video">Video</Chip>
+        </Chips>
 
-        <input type="checkbox" id="Business" name="Business" value="Business" />
-        <label for="Business"> Business</label>
 
-        <input type="checkbox" id="Others" name="Others" value="Others" />
-        <label for="Others"> Others</label><br />
-
-        <p>Resources Type: (you can choose more than one) <span style={{ color: "#ED0A00" }}>*</span></p>
-        <input type="checkbox" id="JournalArticle" name="JournalArticle" value="JournalArticle" />
-        <label for="JournalArticle"> Journal Article</label>
-
-        <input type="checkbox" id="NewspaperArticle" name="NewspaperArticle" value="NewspaperArticle" />
-        <label for="NewspaperArticle"> Newspaper Article</label>
-
-        <input type="checkbox" id="Video" name="Video" value="Video" />
-        <label for="Video"> Video</label>
-
-        <label for="link">Link:</label>
+        <label for="link">Link: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="link" name="link" />
 
-        <h6 style={{ color: "#ED0A00" }}>
+        <p style={{ color: "#ED0A00" }}>
           Reminder: <br />
           Please input one link per upload only. <br />
           Please double check link is valid before submission.
-        </h6>
-        <input style={{ backgroundColor: "#ED0A00", color: "#ffffff", fontSize: "20px", padding: "12px 28px" }} type="submit"
-          value="Submit" />
+        </p>
+
+        <div style={{ textAlign: "center"}}>
+          <Button style={{ backgroundColor: "#001641", color: "#ffffff" ,borderRadius: 5}}
+            position="center"
+            size="md">
+            Submit
+          </Button>
+        </div>
+
+        <br/>
+        <br/>
       </form>
     </>
   );
