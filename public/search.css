@@ -85,14 +85,14 @@ button:focus, button:hover {
 
 /* grid */
 #leftDiv {
-    float: left;
+    /* float: left; */
     width: 30%;
     margin-left: 10px;
 }
 
 #rightDiv {
-    float: left;
-    width: 65%;
+    /* float: left; */
+    width: 70%;
 }
 
 /* filter */
