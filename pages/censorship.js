@@ -1,5 +1,5 @@
 import Header from "../src/components/header";
-import SubHeader from "../src/components/subheader";
+import SubHeader from "../src/components/subHeader";
 import Footer from "../src/components/footer";
 
 import CensorshipPage from "../src/components/staff/censorship";
