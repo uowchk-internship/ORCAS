@@ -22,7 +22,8 @@ export default function Search() {
 
     const [chosenTab, setChosenTab] = useState(["journals", "artsHumanities", "socialScience"])
     const [yearFilter, setYearFilter] = useState("all")
-    const [subjectFilter, setSubjectFilter] = useState(["all","scienceTechnology","artsHumanities","socialScience","business","others"])
+    const [subjectFilter, setSubjectFilter] = useState(["all", "scienceTechnology", "artsHumanities", "socialScience", "business", "others"])
+    const [sortNew, setSortNew] = useState(false)
 
     return (
         <>
@@ -35,7 +36,23 @@ export default function Search() {
                     </button>
                 </div>
             </section>
+            <div class="uw-search--sort cell large-12">
 
+                <div>
+                    <p class="results">Results
+                        <span>&nbsp;1 - 14&nbsp;</span>
+                        of about
+                        <span> 56 </span>
+                        for "keyword"</p>
+                </div>
+                <div class="uw-search--sort-by">
+                    <ul>
+                        <li><a className={`button-hr ` + (sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>New to old</a></li>
+                        <li><a className={`button-hr ` + (!sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>Old to new</a></li>
+                    </ul>
+                </div>
+
+            </div>
 
             <div style={{ padding: 10 }}>
                 <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
@@ -44,6 +61,7 @@ export default function Search() {
                     <Chip value="socialScience">Social Science (100)</Chip>
                 </Chips>
             </div>
+
 
 
             <section className="search-body">
@@ -66,7 +84,7 @@ export default function Search() {
                                 </Accordion.Item>
                             </Accordion>
 
-                            <Accordion multiple  initialItem={0}>
+                            <Accordion multiple initialItem={0}>
                                 <Accordion.Item label="Subject" >
                                     <div>
                                         <Chips value={subjectFilter} onChange={setSubjectFilter} multiple size="md" radius="sm" classNames={classes} >
