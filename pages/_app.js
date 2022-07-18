@@ -1,4 +1,5 @@
 // import '../public/styles.css'
+import '../public/react-datetime.css'
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />

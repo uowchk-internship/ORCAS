@@ -1,5 +1,4 @@
 import Datetime from 'react-datetime';
-import "react-datetime/css/react-datetime.css";
 
 export default function UploadComponent() {
   // const [year, setYear] = useState(1990);
