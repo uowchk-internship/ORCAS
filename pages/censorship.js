@@ -8,7 +8,7 @@ export default function Upload() {
   return (
     <div>
       <Header />
-      <SubHeader />
+      <SubHeader path="/censorship" />
 
       <div className="mainContent">
         <CensorshipPage />

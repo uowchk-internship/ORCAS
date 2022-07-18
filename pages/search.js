@@ -8,7 +8,7 @@ export default function Search() {
   return (
     <div>
       <Header />
-      <SubHeader />
+      <SubHeader path="/search" />
 
       <div className="mainContent">
         <RankPage />

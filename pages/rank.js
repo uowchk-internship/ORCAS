@@ -8,7 +8,7 @@ export default function Rank() {
   return (
     <div>
       <Header />
-      <SubHeader />
+      <SubHeader path="/rank" />
 
       <div className="mainContent">
         <RankPage />

@@ -1,9 +1,10 @@
 import { useState } from "react";
+import Link from 'next/link'
 
 export default function SubHeader(props) {
   let location = props.path !== undefined ? props.path : "";
 
-  
+
   return (
     <section className="uw-masthead uw-masthead--page-nav uw-masthead--image">
       <div className="grid-container blue-nav">
@@ -95,11 +96,11 @@ export default function SubHeader(props) {
                 </a>
               </li>
               <li>
-                <a href="https://www.uowchk.edu.hk/current-students/student-learning-support-system/"></a>
-                Students Learning Support System
+                <a href="https://www.uowchk.edu.hk/current-students/student-learning-support-system/">
+                  Students Learning Support System
+                </a>
               </li>
               <li>
-                <a href="/"></a>
                 ORCAS
               </li>
             </ul>
@@ -109,13 +110,24 @@ export default function SubHeader(props) {
               <p className="page-navigator__title">ORCAS</p>
               <ul className="no-bullet">
                 <li>
-                  <a href="/rank">Rank</a>
+                  <span className={location === "/" ? "currentbranch0" : ""} >
+                    <Link href="/">ORCAS</Link>
+                  </span>
                 </li>
                 <li>
-                  <a href="/upload">Upload</a>
+                  <span className={location === "/rank" ? "currentbranch0" : ""} >
+                    <Link href="/rank">Rank</Link>
+                  </span>
                 </li>
                 <li>
-                  <a href="/search">Search</a>
+                  <span className={location === "/upload" ? "currentbranch0" : ""} >
+                    <Link href="/upload">Upload</Link>
+                  </span>
+                </li>
+                <li>
+                  <span className={location === "/search" ? "currentbranch0" : ""} >
+                    <Link href="/search">Search</Link>
+                  </span>
                 </li>
               </ul>
               <button className="page-navigator-more">Show more</button>
