@@ -57,8 +57,8 @@ export default function Search() {
             <div style={{ padding: 10 }}>
                 <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
                     <Chip value="journals">Journals Articles (100)</Chip>
-                    <Chip value="artsHumanities">Newspapers Articles (100)</Chip>
-                    <Chip value="socialScience">Social Science (100)</Chip>
+                    <Chip value="newspaper">Newspapers Articles (100)</Chip>
+                    <Chip value="video">Video (100)</Chip>
                 </Chips>
             </div>
 
