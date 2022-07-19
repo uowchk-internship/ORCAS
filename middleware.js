@@ -1,9 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server'
 
 export async function middleware(req, ev) {
-    const { pathname } = req.nextUrl
-    if (pathname == '/') {
-        return NextResponse.redirect('/')
-    }
-    return NextResponse.next()
+    const { pathname, origin } = req.nextUrl
+    console.log("Path: "+pathname)
+    console.log("Orig: "+origin)
+    return NextResponse.rewrite(`${origin}${pathname}`)
 }
