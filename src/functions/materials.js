@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 export const getWithKeywordsAndStatus = async (status, keyword) => {
-    console.log("query wiith keyword: " + keyword);
 
     let url = `https://tomcat.johnnyip.com/orcas/api/material/findByKeywordAndStatus/${status}/${keyword}`
     if (keyword === undefined || keyword === "") {

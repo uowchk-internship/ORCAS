@@ -10344,7 +10344,7 @@ input:disabled,
 input[readonly],
 textarea:disabled,
 textarea[readonly] {
-    background-color: #e6e6e6;
+    /* background-color: #e6e6e6; */
     cursor: not-allowed
 }
 
@@ -34462,7 +34462,7 @@ screen and (min-width:48em) {
     font-family: "Chronicle Display A", "Chronicle Display B", "Times New Roman", Times, serif;
     font-size: 1.75rem;
     line-height: 2.375rem;
-    margin-bottom: 40px
+    /* margin-bottom: 40px */
 }
 
 @media (min-width:768px) {
