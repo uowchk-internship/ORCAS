@@ -17,7 +17,7 @@ export default function ApprovalItem(props) {
                     </div>
                 </td>
                 <td>
-                    Approved
+                    <b>Approved</b>
                 </td>
                 <td>
                     <div style={{ textAlign: "center" }}>

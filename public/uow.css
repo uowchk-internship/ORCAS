@@ -32487,7 +32487,7 @@ screen and (min-width:48em) {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
     margin-top: 1rem
 }
 

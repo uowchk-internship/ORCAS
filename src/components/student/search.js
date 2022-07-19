@@ -95,7 +95,6 @@ export default function Search() {
                                         </Chips>
                                     </div>
                                 </Accordion.Item>
-
                             </Accordion>
 
                         </div>

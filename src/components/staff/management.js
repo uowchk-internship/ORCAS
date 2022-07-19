@@ -1,11 +1,29 @@
 import { useState } from 'react';
-import { SegmentedControl, Button, Modal, Group, Accordion } from '@mantine/core';
+import { SegmentedControl, Chips, Chip, Image, Button, Modal, Group, Accordion, createStyles } from '@mantine/core';
 
 import MaterialDetailEdit from './materialDetailEdit'
 import ManagementItem from './managementItem'
 
+const useStyles = createStyles((theme, _params, getRef) => ({
+  iconWrapper: {
+    ref: getRef('iconWrapper'),
+  },
+
+  checked: {
+    backgroundColor: `#001641 !important`,
+    color: theme.white,
+
+    [`& .${getRef('iconWrapper')}`]: {
+      color: theme.white,
+    },
+  },
+}));
+
+
 export default function Management() {
-  const [filter, setFilter] = useState("all")
+  const { classes } = useStyles();
+
+  const [status, setStatus] = useState("all")
   const [showDetailView, setShowDetailView] = useState(false)
 
   const [chosenTab, setChosenTab] = useState(["journals", "artsHumanities", "socialScience"])
@@ -17,34 +35,87 @@ export default function Management() {
   return (
     <>
 
-      <div style={{ textAlign: "center", paddingLeft: 200, paddingRight: 200 }}>
-        <SegmentedControl fullWidth color="dark" size="md"
-          value={filter}
-          onChange={setFilter}
-          data={[
-            { label: 'All', value: 'all' },
-            { label: 'Pending', value: 'pending' },
-            { label: 'Approved', value: 'approved' },
-            { label: 'Rejected', value: 'reject' },
-          ]} />
+      {/* Search area */}
+      <section id="search-bar" >
+        <div id="search-container">
+          <input type="text" placeholder="Please input the keywords" name="search" />
+          <button type="submit" style={{ height: 39 }}>
+            {/* <i className="fa fa-search"></i> */}
+            <Image src="/images/search.png" height={39} width={39} />
+          </button>
+        </div>
+      </section>
+      <div class="uw-search--sort cell large-12">
+        <div>
+          <p class="results">Results
+            <span>&nbsp;1 - 14&nbsp;</span>
+            of about
+            <span> 56 </span>
+            for "keyword"</p>
+        </div>
+        <div class="uw-search--sort-by">
+          <ul>
+            <li><a className={`button-hr ` + (sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>New to old</a></li>
+            <li><a className={`button-hr ` + (!sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>Old to new</a></li>
+          </ul>
+        </div>
       </div>
-      <br />
 
+      {/* Search filters */}
+      <Accordion multiple initialItem={0}>
+        <Accordion.Item label="Search Filters" >
+          <p>
+            <b>Subjects:</b>
+            <div>
+              <Chips value={subjectFilter} onChange={setSubjectFilter} multiple size="md" radius="sm" classNames={classes} >
+                <Chip value="all">All</Chip>
+                <Chip value="scienceTechnology">Science & Technology</Chip>
+                <Chip value="artsHumanities">Arts & Humanities</Chip>
+                <Chip value="socialScience">Social Science</Chip>
+                <Chip value="business">Business</Chip>
+                <Chip value="others">Others</Chip>
+              </Chips>
+            </div>
+
+            <b>Type:</b>
+            <div >
+              <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
+                <Chip value="journals">Journals Articles (100)</Chip>
+                <Chip value="newspaper">Newspapers Articles (100)</Chip>
+                <Chip value="video">Video (100)</Chip>
+              </Chips>
+            </div>
+
+            <b>Status:</b>
+            <div >
+              <Chips value={status} onChange={setStatus} size="md" radius="sm" classNames={classes}>
+                <Chip value="all">All</Chip>
+                <Chip value="pending">Pending</Chip>
+                <Chip value="approve">Approved</Chip>
+                <Chip value="reject">Rejected</Chip>
+              </Chips>
+            </div>
+
+          </p>
+        </Accordion.Item>
+      </Accordion>
+
+
+
+      {/* Main table */}
       <table style={{ textAlign: "center" }}>
         <thead>
           <tr>
             <td style={{ width: "50%" }}>Topic</td>
             <td style={{ width: "20%" }}>Detail</td>
             <td style={{ width: "10%" }}>Status</td>
-            <td style={{ width: "20%" }}>Action</td>
+            <td style={{ width: "10%" }}>Action</td>
           </tr>
         </thead>
 
         <tbody>
-
           <ManagementItem setShowDetailView={setShowDetailView} />
           <ManagementItem setShowDetailView={setShowDetailView} />
-
         </tbody>
       </table>
 
