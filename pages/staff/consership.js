@@ -1,26 +1,25 @@
 import Header from "../src/components/header";
-import SubHeader from "../src/components/subHeaderStudent";
+import SubHeader from "../src/components/subHeader";
 import Footer from "../src/components/footer";
 
-import LoginPage from "../src/components/staff/login";
+import CensorshipPage from "../src/components/staff/censorship";
 import BackButton from "../src/components/backButton";
 
-export default function Rank() {
+export default function Upload() {
   return (
     <div>
       <Header />
-      <SubHeader path="/login" />
-      
+      <SubHeader path="/censorship" />
+
       <div className="mainContent">
-      <BackButton />
+        <BackButton />
 
         <section className="page-form grid-container">
-          <LoginPage />
+          <CensorshipPage />
         </section>
       </div>
 
       <Footer />
     </div>
   );
-}
-
+  }
