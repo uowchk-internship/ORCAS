@@ -1,5 +1,8 @@
 import { Chips, Chip, createStyles, Image, Accordion, Group } from '@mantine/core';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+import { getWithKeywordsAndStatus } from '../../functions/materials'
+import SearchItem from './searchItem'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
     iconWrapper: {
@@ -20,43 +23,101 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 export default function Search() {
     const { classes } = useStyles();
 
-    const [chosenTab, setChosenTab] = useState(["journals", "artsHumanities", "socialScience"])
-    const [yearFilter, setYearFilter] = useState("all")
-    const [subjectFilter, setSubjectFilter] = useState(["all", "scienceTechnology", "artsHumanities", "socialScience", "business", "others"])
+    const [fetched, setFetched] = useState(false)
+    const [materials, setMaterials] = useState([])
+    const [filteredMaterials, setFilteredMaterials] = useState([])
+
+    const [keyword, setKeyword] = useState("")
+    const [chosenTab, setChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
+    const [yearFilter, setYearFilter] = useState("0")
+    const [subjectFilter, setSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
     const [sortNew, setSortNew] = useState(false)
+
+    const checkFilterMatch = (item) => {
+        let result = false;
+
+        //checking type
+        for (const tab of chosenTab)
+            if (item.type.includes(tab))
+                result = true;
+
+        if (result) {
+            result = false;
+
+            //checking subject
+            for (const subject of subjectFilter)
+                if (item.subject.includes(subject))
+                    result = true;
+        }
+
+        if (result && yearFilter !== "0") {
+            result = false;
+
+            //checking year
+            let targetYear = new Date().getFullYear() - parseInt(yearFilter)
+            if (item.publishYear >= targetYear)
+                result = true
+        }
+
+        return result;
+    }
+
+    useEffect(() => {
+        const fetchMaterials = async () => {
+            let result = await getWithKeywordsAndStatus("approve", keyword)
+            setMaterials(result)
+        }
+
+        if (!fetched) {
+            setFetched(true)
+            fetchMaterials();
+        }
+
+        //Sort the array with old and new
+        // let filtered = []
+        // for (const item of materials) {
+        //     if (checkFilterMatch(item))
+        //         filtered.push(item)
+        // }
+        if (sortNew){
+            console.log("by new")
+            setFilteredMaterials(materials.sort((a, b) => a.publishYear - b.publishYear))
+        }else{
+            console.log("by old")
+            setFilteredMaterials(materials.sort((a, b) => b.publishYear - a.publishYear))
+        }
+        
+    })
 
     return (
         <>
             <section id="search-bar" >
                 <div id="search-container">
-                    <input type="text" placeholder="Please input the keywords" name="search" />
+                    <input value={keyword} onChange={(e) => { setKeyword(e.target.value); setFetched(false) }}
+                        type="text" placeholder="Please input the keywords" name="search" />
                     <button type="submit" style={{ height: 39 }}>
                         {/* <i className="fa fa-search"></i> */}
                         <Image src="/images/search.png" height={39} width={39} />
                     </button>
                 </div>
             </section>
-            <div class="uw-search--sort cell large-12">
+            <div className="uw-search--sort cell large-12">
                 <div>
-                    <p class="results">Results
-                        <span>&nbsp;1 - 14&nbsp;</span>
-                        of about
-                        <span> 56 </span>
-                        for "keyword"</p>
+                    <p className="results">Results 1 - 10 of {materials.length} for "{keyword}"</p>
                 </div>
-                <div class="uw-search--sort-by">
+                <div className="uw-search--sort-by">
                     <ul>
-                        <li><a className={`button-hr ` + (sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>New to old</a></li>
-                        <li><a className={`button-hr ` + (!sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>Old to new</a></li>
+                        <li><a className={`button-hr ` + (sortNew ? 'selected' : "")} onClick={() => { setSortNew(true) }}>New to old</a></li>
+                        <li><a className={`button-hr ` + (!sortNew ? 'selected' : "")} onClick={() => { setSortNew(false) }}>Old to new</a></li>
                     </ul>
                 </div>
             </div>
 
             <div style={{ padding: 10 }}>
                 <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
-                    <Chip value="journals">Journals Articles (100)</Chip>
-                    <Chip value="newspaper">Newspapers Articles (100)</Chip>
-                    <Chip value="video">Video (100)</Chip>
+                    <Chip value="Journals Article">Journals Articles (100)</Chip>
+                    <Chip value="Newspapers Article">Newspapers Articles (100)</Chip>
+                    <Chip value="Video">Video (100)</Chip>
                 </Chips>
             </div>
 
@@ -73,10 +134,10 @@ export default function Search() {
                                 <Accordion.Item label="Publication Year">
                                     <div>
                                         <Chips value={yearFilter} onChange={setYearFilter} size="md" radius="sm" classNames={classes} >
-                                            <Chip value="all">All</Chip>
-                                            <Chip value="6year">Last 6 Years</Chip>
-                                            <Chip value="3year">Last 3 Years</Chip>
-                                            <Chip value="1year">Last Year</Chip>
+                                            <Chip value="0">All</Chip>
+                                            <Chip value="6">Last 6 Years</Chip>
+                                            <Chip value="3">Last 3 Years</Chip>
+                                            <Chip value="1">Last Year</Chip>
                                         </Chips>
                                     </div>
                                 </Accordion.Item>
@@ -86,12 +147,11 @@ export default function Search() {
                                 <Accordion.Item label="Subject" >
                                     <div>
                                         <Chips value={subjectFilter} onChange={setSubjectFilter} multiple size="md" radius="sm" classNames={classes} >
-                                            <Chip value="all">All</Chip>
-                                            <Chip value="scienceTechnology">Science & Technology</Chip>
-                                            <Chip value="artsHumanities">Arts & Humanities</Chip>
-                                            <Chip value="socialScience">Social Science</Chip>
-                                            <Chip value="business">Business</Chip>
-                                            <Chip value="others">Others</Chip>
+                                            <Chip value="Science & Technology">Science & Technology</Chip>
+                                            <Chip value="Arts & Humanities">Arts & Humanities</Chip>
+                                            <Chip value="Social Science">Social Science</Chip>
+                                            <Chip value="Business">Business</Chip>
+                                            <Chip value="Others">Others</Chip>
                                         </Chips>
                                     </div>
                                 </Accordion.Item>
@@ -99,59 +159,40 @@ export default function Search() {
 
                         </div>
 
+
+
                         <div className="uw-search--results cell large-9" >
                             <h2 style={{ fontSize: 40 }}>Search Results</h2>
 
                             <div id="result-container">
-                                <div className="row result" id="result-1">
-                                    <div className="col-sm-8 title" id="title-1">Science is good.</div>
-                                    <div className="col-sm-4 author" id="author-1">Chris Wong<br />ABC Magainze</div>
-                                    <div className="detail" id="detail-1">Newspaper Article | Published Online: 19 June 2022 | Views: 100</div>
-                                </div>
-
-                                <div className="row result" id="result-2">
-                                    <div className="col-sm-8 title" id="title-2"></div>
-                                    <div className="col-sm-4 author" id="author-2"><br /></div>
-                                    <div className="detail" id="detail-2"></div>
-                                </div>
-
-                                <div className="row result" id="result-3">
-                                    <div className="col-sm-8 title" id="title-3"></div>
-                                    <div className="col-sm-4 author" id="author-3"><br /></div>
-                                    <div className="detail" id="detail-3"></div>
-                                </div>
-
-                                <div className="row result" id="result-4">
-                                    <div className="col-sm-8 title" id="title-4"></div>
-                                    <div className="col-sm-4 author" id="author-4"><br /></div>
-                                    <div className="detail" id="detail-4"></div>
-                                </div>
-
-                                <div className="row result" id="result-5">
-                                    <div className="col-sm-8 title" id="title-5"></div>
-                                    <div className="col-sm-4 author" id="author-5"><br /></div>
-                                    <div className="detail" id="detail-5"></div>
-                                </div>
+                                {(filteredMaterials.length > 0) ?
+                                    [...filteredMaterials].map((item, i) => {
+                                        if (checkFilterMatch(item))
+                                            return <SearchItem data={item} key={i} />
+                                    }) :
+                                    <>
+                                        No result
+                                    </>
+                                }
                             </div>
-
                             <div >
                                 <nav aria-label="pagination">
-                                    <ul class="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
+                                    <ul className="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
                                         <Group>
-                                            <li class="pagination-previous button backward">
+                                            <li className="pagination-previous button backward">
                                                 <a aria-label="Previous Page">
-                                                    <span class="icon--chevron-left"></span>
-                                                    Previous<span class="show-for-sr">page</span>
+                                                    <span className="icon--chevron-left"></span>
+                                                    Previous<span className="show-for-sr">page</span>
                                                 </a>
                                             </li>
                                             <li><a aria-label="Page 1">1</a></li>
-                                            <li class="current"><span class="show-for-sr">You're on page</span>2</li>
+                                            <li className="current"><span className="show-for-sr">You're on page</span>2</li>
                                             <li><a aria-label="Page 3">3</a></li>
                                             <li><a aria-label="Page 4">4</a></li>
-                                            <li class="pagination-next button">
+                                            <li className="pagination-next button">
                                                 <a aria-label="Next Page">
-                                                    Next<span class="show-for-sr">page</span>
-                                                    <span class="icon--chevron-right"></span>
+                                                    Next<span className="show-for-sr">page</span>
+                                                    <span className="icon--chevron-right"></span>
                                                 </a>
                                             </li>
 

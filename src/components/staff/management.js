@@ -46,8 +46,8 @@ export default function Management() {
         </div>
       </section>
 
-            {/* Search filters */}
-            <Accordion multiple initialItem={0}>
+      {/* Search filters */}
+      <Accordion multiple initialItem={0}>
         <Accordion.Item label="Search Filters" >
           <p>
             <b>Subjects:</b>

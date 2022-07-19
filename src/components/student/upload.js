@@ -79,6 +79,7 @@ export default function UploadComponent() {
           Reminder: <br />
           Please input one link per upload only. <br />
           Please double check link is valid before submission.
+          Your link must include "https://" or "http://" at the beginning.
         </p>
 
         <div style={{ textAlign: "center" }}>
