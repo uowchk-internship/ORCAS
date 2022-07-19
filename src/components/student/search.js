@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 import { getWithKeywordsAndStatus } from '../../functions/materials'
 import SearchItem from './searchItem'
+import PageNumber from '../page'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
     iconWrapper: {
@@ -26,6 +27,9 @@ export default function Search() {
     const [fetched, setFetched] = useState(false)
     const [materials, setMaterials] = useState([])
     const [filteredMaterials, setFilteredMaterials] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(1)
+
 
     const [keyword, setKeyword] = useState("")
     const [chosenTab, setChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
@@ -66,7 +70,10 @@ export default function Search() {
         const fetchMaterials = async () => {
             let result = await getWithKeywordsAndStatus("approve", keyword)
             setMaterials(result)
+            setCurrentPage(1)
+            setTotalPage(Math.ceil(result.length / 10))
         }
+
 
         if (!fetched) {
             setFetched(true)
@@ -79,14 +86,17 @@ export default function Search() {
         //     if (checkFilterMatch(item))
         //         filtered.push(item)
         // }
-        if (sortNew){
+        let filtered = []
+        if (sortNew) {
             console.log("by new")
-            setFilteredMaterials(materials.sort((a, b) => a.publishYear - b.publishYear))
-        }else{
+            filtered = materials.sort((a, b) => a.publishYear - b.publishYear)
+        } else {
             console.log("by old")
-            setFilteredMaterials(materials.sort((a, b) => b.publishYear - a.publishYear))
+            filtered = materials.sort((a, b) => b.publishYear - a.publishYear)
         }
-        
+
+        setFilteredMaterials(filtered)
+
     })
 
     return (
@@ -179,23 +189,11 @@ export default function Search() {
                                 <nav aria-label="pagination">
                                     <ul className="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
                                         <Group>
-                                            <li className="pagination-previous button backward">
-                                                <a aria-label="Previous Page">
-                                                    <span className="icon--chevron-left"></span>
-                                                    Previous<span className="show-for-sr">page</span>
-                                                </a>
-                                            </li>
-                                            <li><a aria-label="Page 1">1</a></li>
-                                            <li className="current"><span className="show-for-sr">You're on page</span>2</li>
-                                            <li><a aria-label="Page 3">3</a></li>
-                                            <li><a aria-label="Page 4">4</a></li>
-                                            <li className="pagination-next button">
-                                                <a aria-label="Next Page">
-                                                    Next<span className="show-for-sr">page</span>
-                                                    <span className="icon--chevron-right"></span>
-                                                </a>
-                                            </li>
-
+                                            <PageNumber 
+                                            currentPage={currentPage}
+                                            setCurrentPage={setCurrentPage}
+                                            totalPage={totalPage}
+                                            />
                                         </Group>
                                     </ul>
                                 </nav>
