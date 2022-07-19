@@ -10373,30 +10373,30 @@ input[type=search] {
     color: rgba(0, 0, 0, .6)
 }
 
-[type=checkbox],
+/* [type=checkbox],
 [type=file],
 [type=radio] {
     margin: 0 0 1.5625rem
-}
+} */
 
-[type=checkbox]+label,
+/* [type=checkbox]+label,
 [type=radio]+label {
     display: inline-block;
     vertical-align: baseline;
     margin-left: .2rem;
     margin-right: .2rem;
     margin-bottom: 0
-}
+} */
 
-[type=checkbox]+label[for],
+/* [type=checkbox]+label[for],
 [type=radio]+label[for] {
     cursor: pointer
-}
+} */
 
-label>[type=checkbox],
+/* label>[type=checkbox],
 label>[type=radio] {
     margin-right: .78125rem
-}
+} */
 
 [type=file] {
     width: 100%
@@ -12107,7 +12107,7 @@ thead td,
 thead th {
     padding: .5rem .625rem .625rem;
     font-weight: 600;
-    text-align: left
+    text-align: center
 }
 
 tbody td,
@@ -14772,9 +14772,9 @@ p>img {
     display: inline-block
 }
 
-label {
+/* label {
     margin-bottom: .625rem
-}
+} */
 
 body {
     background-color: #fff;
@@ -16825,7 +16825,7 @@ screen and (min-width:64em) {
         display: inline-block
     }
 }
-
+/* 
 .radio-list input[type=checkbox]+label,
 .radio-list input[type=radio]+label {
     padding: 0
@@ -16898,7 +16898,7 @@ screen and (min-width:64em) {
     opacity: 1;
     -webkit-transform: scale(1);
     transform: scale(1)
-}
+} */
 
 .section-breaker {
     height: .0625rem;
@@ -32941,11 +32941,11 @@ screen and (min-width:48em) {
     }
 }
 
-.uw-search--filter .posts-filter input,
+/* .uw-search--filter .posts-filter input,
 .uw-search--filter .posts-filter input[type=radio]+label,
 .uw-search--filter .posts-filter label {
     margin-left: .5em
-}
+} */
 
 @media (max-width:767px) {
     .uw-search--filter .posts-filter .collection_holder {
@@ -33120,7 +33120,7 @@ screen and (min-width:48em) {
     margin-top: 5px
 }
 
-.posts-filter [type=radio] {
+/* .posts-filter [type=radio] {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -33163,7 +33163,7 @@ screen and (min-width:48em) {
 
 .posts-filter [type=radio]:focus+label::after {
     background: #ed0a00
-}
+} */
 
 .uw-card {
     margin-bottom: 25px

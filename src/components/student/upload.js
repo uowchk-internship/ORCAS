@@ -70,7 +70,7 @@ export default function UploadComponent() {
           <Chip value="newspaper">Newspaper Article</Chip>
           <Chip value="video">Video</Chip>
         </Chips>
-
+        <br />
 
         <label for="link">Link: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="link" name="link" />
