@@ -8,8 +8,6 @@ export default function PageNumber(props) {
         (current >= totalPage - 2) ? totalPage : current + 2;
     let pages = []
 
-    console.log("current: " + current + ", " + current === 1)
-
     for (let i = minPage; i <= maxPage; i++) {
         pages.push(i)
     }
@@ -29,7 +27,7 @@ export default function PageNumber(props) {
             {
                 [...pages].map((item, i) => {
                     return (
-                        <li className={(item === current) ? "current" : ""}>
+                        <li className={(item === current) ? "current" : ""} key={i}>
                             <a
                                 onClick={() => { setCurrentPage(parseInt(item)) }}
                             >{item}</a>

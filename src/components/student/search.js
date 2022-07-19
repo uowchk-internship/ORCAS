@@ -30,12 +30,38 @@ export default function Search() {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPage, setTotalPage] = useState(1)
 
-
     const [keyword, setKeyword] = useState("")
+    const [oldKeyword, setOldKeyword] = useState("")
+
+    //filters
     const [chosenTab, setChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
     const [yearFilter, setYearFilter] = useState("0")
     const [subjectFilter, setSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
     const [sortNew, setSortNew] = useState(false)
+
+    //for monitoring changes in filter
+    const [oldChosenTab, setOldChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
+    const [oldYearFilter, setOldYearFilter] = useState("0")
+    const [oldSubjectFilter, setOldSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
+    const [oldSortNew, setOldSortNew] = useState(false)
+
+    const checkFilterChanged = () => {
+        let result = true;
+
+        if (chosenTab !== oldChosenTab) {
+            setOldChosenTab(chosenTab)
+        } else if (yearFilter !== oldYearFilter) {
+            setOldYearFilter(yearFilter)
+        } else if (subjectFilter !== oldSubjectFilter) {
+            setOldSubjectFilter(subjectFilter)
+        } else if (sortNew !== oldSortNew) {
+            setOldSortNew(sortNew)
+        } else {
+            result = false
+        }
+
+        return result
+    }
 
     const checkFilterMatch = (item) => {
         let result = false;
@@ -66,36 +92,44 @@ export default function Search() {
         return result;
     }
 
-    useEffect(() => {
-        const fetchMaterials = async () => {
-            let result = await getWithKeywordsAndStatus("approve", keyword)
-            setMaterials(result)
-            setCurrentPage(1)
-            setTotalPage(Math.ceil(result.length / 10))
-        }
-
-
-        if (!fetched) {
-            setFetched(true)
-            fetchMaterials();
-        }
-
-        //Sort the array with old and new
-        // let filtered = []
-        // for (const item of materials) {
-        //     if (checkFilterMatch(item))
-        //         filtered.push(item)
-        // }
+    const filterAndSort = () => {
+        //filter and sort the array
         let filtered = []
+        for (const item of materials) {
+            if (checkFilterMatch(item)) {
+                filtered.push(item)
+            }
+        }
+
         if (sortNew) {
-            console.log("by new")
-            filtered = materials.sort((a, b) => a.publishYear - b.publishYear)
+            filtered.sort((a, b) => b.publishYear - a.publishYear)
         } else {
-            console.log("by old")
-            filtered = materials.sort((a, b) => b.publishYear - a.publishYear)
+            filtered.sort((a, b) => a.publishYear - b.publishYear)
         }
 
         setFilteredMaterials(filtered)
+        setCurrentPage(1)
+        setTotalPage(Math.ceil(filtered.length / 10))
+    }
+
+    const fetchMaterials = async (keyword_) => {
+        let result = await getWithKeywordsAndStatus("approve", keyword_)
+        setMaterials(result)
+        setFetched(true)
+    }
+
+
+
+    useEffect(() => {
+
+        if (!fetched) {
+            fetchMaterials("")
+            filterAndSort()
+        }
+
+        if (checkFilterChanged()) {
+            filterAndSort()
+        }
 
     })
 
@@ -103,17 +137,28 @@ export default function Search() {
         <>
             <section id="search-bar" >
                 <div id="search-container">
-                    <input value={keyword} onChange={(e) => { setKeyword(e.target.value); setFetched(false) }}
+                    <input value={keyword} onChange={(e) => {
+                        setKeyword(e.target.value);
+                        fetchMaterials(e.target.value);
+                        filterAndSort()
+                    }}
                         type="text" placeholder="Please input the keywords" name="search" />
-                    <button type="submit" style={{ height: 39 }}>
-                        {/* <i className="fa fa-search"></i> */}
+                    <a onClick={() => setFetched(false)}>
                         <Image src="/images/search.png" height={39} width={39} />
-                    </button>
+                    </a>
                 </div>
             </section>
             <div className="uw-search--sort cell large-12">
                 <div>
-                    <p className="results">Results 1 - 10 of {materials.length} for "{keyword}"</p>
+                    <p className="results">
+                        Results &nbsp;
+                        <b>
+                            {(currentPage - 1) * 10 + 1} -&nbsp;
+                            {(filteredMaterials.length < currentPage * 10) ?
+                                filteredMaterials.length : currentPage * 10}
+                        </b>
+                        &nbsp;of <b>{filteredMaterials.length}</b> for "<b>{keyword}</b>"
+                    </p>
                 </div>
                 <div className="uw-search--sort-by">
                     <ul>
@@ -125,9 +170,9 @@ export default function Search() {
 
             <div style={{ padding: 10 }}>
                 <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
-                    <Chip value="Journals Article">Journals Articles (100)</Chip>
-                    <Chip value="Newspapers Article">Newspapers Articles (100)</Chip>
-                    <Chip value="Video">Video (100)</Chip>
+                    <Chip value="Journals Article">Journals Articles ({filteredMaterials.filter(item => (item.type === "Journals Article")).length})</Chip>
+                    <Chip value="Newspapers Article">Newspapers Articles ({filteredMaterials.filter(item => (item.type === "Newspapers Article")).length})</Chip>
+                    <Chip value="Video">Video ({filteredMaterials.filter(item => (item.type === "Video")).length})</Chip>
                 </Chips>
             </div>
 
@@ -177,7 +222,8 @@ export default function Search() {
                             <div id="result-container">
                                 {(filteredMaterials.length > 0) ?
                                     [...filteredMaterials].map((item, i) => {
-                                        if (checkFilterMatch(item))
+                                        if (checkFilterMatch(item) &&
+                                            ((i <= (currentPage * 10 - 1)) && (i >= ((currentPage - 1) * 10))))
                                             return <SearchItem data={item} key={i} />
                                     }) :
                                     <>
@@ -189,10 +235,10 @@ export default function Search() {
                                 <nav aria-label="pagination">
                                     <ul className="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
                                         <Group>
-                                            <PageNumber 
-                                            currentPage={currentPage}
-                                            setCurrentPage={setCurrentPage}
-                                            totalPage={totalPage}
+                                            <PageNumber
+                                                currentPage={currentPage}
+                                                setCurrentPage={setCurrentPage}
+                                                totalPage={totalPage}
                                             />
                                         </Group>
                                     </ul>

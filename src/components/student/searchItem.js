@@ -4,9 +4,9 @@ import { addViewCount } from '../../functions/materials'
 
 export default function SearchItem(props) {
     let data = props.data
+
     return (
         <>
-
             <table className="noBorder">
                 <tbody>
                     <tr>
