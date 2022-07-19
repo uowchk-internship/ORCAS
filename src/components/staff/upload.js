@@ -35,22 +35,22 @@ export default function UploadComponent() {
   return (
     <>
       <form>
-        <label for="se">Student Email: <span style={{ color: "#ED0A00" }}>*</span></label>
+        <label htmlFor="se">Student Email: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="se" name="ses" />
 
-        <label for="topic">Topic: <span style={{ color: "#ED0A00" }}>*</span></label>
+        <label htmlFor="topic">Topic: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="topic" name="topic" />
 
-        <label for="author">Author:</label>
+        <label htmlFor="author">Author:</label>
         <input type="text" id="author" name="author" />
 
-        <label for="datepicker">Publish year: <span style={{ color: "#ED0A00" }}>*</span></label>
+        <label htmlFor="datepicker">Publish year: <span style={{ color: "#ED0A00" }}>*</span></label>
         <Datetime
           initialViewMode="years"
           dateFormat="YYYY" timeFormat={false}
         />
 
-        <label for="publisher">Publisher:</label>
+        <label htmlFor="publisher">Publisher:</label>
         <input type="text" id="publisher" name="publisher" />
 
         <label >Subject: (you can choose more than one) <span style={{ color: "#ED0A00" }}>*</span></label>
@@ -72,7 +72,7 @@ export default function UploadComponent() {
         </Chips>
 
 
-        <label for="link">Link: <span style={{ color: "#ED0A00" }}>*</span></label>
+        <label htmlFor="link">Link: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="link" name="link" />
 
         <p style={{ color: "#ED0A00" }}>
