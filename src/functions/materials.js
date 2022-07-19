@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 export const getWithKeywordsAndStatus = async (status, keyword) => {
-    console.log("query wiith keyword: "+keyword);
+    console.log("query wiith keyword: " + keyword);
 
     let url = `https://tomcat.johnnyip.com/orcas/api/material/findByKeywordAndStatus/${status}/${keyword}`
     if (keyword === undefined || keyword === "") {
@@ -27,12 +27,30 @@ export const getWithKeywordsAndStatus = async (status, keyword) => {
 
 export const addViewCount = async (data) => {
     data.views++;
-    console.log("data: ")
-    console.log(data)
     let url = `https://tomcat.johnnyip.com/orcas/api/material/`
-    await axios.post(url,data)
-        .then((response) => {})
+    await axios.post(url, data)
+        .then((response) => { })
         .catch((err) => {
             console.log(err);
         })
+}
+
+export const newMaterial = async (data) => {
+    let result = ""
+    let url = `https://tomcat.johnnyip.com/orcas/api/material/`
+    await axios.post(url, data)
+        .then((response) => {
+            if (response.status == 200) {
+                result = "done"
+            } else {
+                result = "fail"
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            result = "fail"
+        })
+
+    return result
+
 }

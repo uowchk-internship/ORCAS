@@ -1,7 +1,9 @@
 import { Image, Button, Group } from '@mantine/core';
 
 
-export default function UploadResultFail() {
+export default function UploadResultFail(props) {
+    let setShowPopup = props.setShowPopup
+
     return (
         <>
             <div style={{ textAlign: 'center' }}>
@@ -16,7 +18,9 @@ export default function UploadResultFail() {
 
                 <Button style={{ backgroundColor: "#ed0a00", color: "#ffffff", borderRadius: 5 }}
                     position="center"
-                    size="md">
+                    size="md"
+                    onClick={() => setShowPopup(false)}
+                >
                     Retry
                 </Button>
 

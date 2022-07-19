@@ -11,9 +11,9 @@ export default function Login() {
         <>
             <section class="page-form grid-container">
                 <form>
-                    <label for="loginEmail">Email:</label>
+                    <label htmlFor="loginEmail">Email:</label>
                     <input type="text" id="loginEmail" name="loginPart" /><br />
-                    <label for="loginPw">Password:</label>
+                    <label htmlFor="loginPw">Password:</label>
                     <input type="text" id="loginPw" name="loginPart" /><br />
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <div style={{ textAlign: "center" }}>

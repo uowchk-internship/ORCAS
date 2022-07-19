@@ -14429,7 +14429,7 @@ body:not(.user-is-tabbing) .checkbox:focus+label {
     outline: 1px dotted #001641;
     -webkit-box-shadow: 0 0 2px #fff;
     box-shadow: 0 0 2px #fff;
-    text-decoration: underline
+    /* text-decoration: underline */
 }
 
 .sr-only {
