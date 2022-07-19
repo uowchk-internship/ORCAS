@@ -525,18 +525,29 @@ svg:not(:root).svg-inline--fa {
   padding-bottom: 10px;
 }
 
-h1.checklink {
-  color: #ED0A00;
-  font-size: 2.5em;
-}
-
 .rdtPrev,
 .rdtNext {
   width: 15%;
 }
 
-[type=checkbox]+label,
-[type=radio]+label {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+#select-part {
+  font-family: sans-serif;
+  font-style: normal;
+  padding-left: 50px;
+  padding-top: 10px;
+}
+
+h2.checklink {
+  color: #ED0A00;
+  font-size: 50px;
+}
+
+#left-col {
+  float: left;
+  padding-right: 20px;
+}
+
+p.description {
+  line-height: 0px;
+  padding-bottom: 20px;
 }

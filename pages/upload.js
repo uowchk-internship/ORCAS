@@ -1,5 +1,5 @@
 import Header from "../src/components/header";
-import SubHeader from "../src/components/subHeader";
+import SubHeader from "../src/components/subHeaderStudent";
 import Footer from "../src/components/footer";
 
 import UploadPage from "../src/components/student/upload";

@@ -138,6 +138,11 @@ export default function SubHeader(props) {
                     <Link href="/search">Search</Link>
                   </span>
                 </li>
+                <li>
+                  <span className={location === "/login" ? "currentbranch0" : ""} >
+                    <Link href="/login">Login</Link>
+                  </span>
+                </li>
               </ul>
               <button className="page-navigator-more">Show more</button>
             </div>
