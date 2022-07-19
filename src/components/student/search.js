@@ -1,4 +1,4 @@
-import { Chips, Chip, createStyles, Image, Accordion } from '@mantine/core';
+import { Chips, Chip, createStyles, Image, Accordion, Group } from '@mantine/core';
 import { useState } from 'react'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
@@ -37,7 +37,6 @@ export default function Search() {
                 </div>
             </section>
             <div class="uw-search--sort cell large-12">
-
                 <div>
                     <p class="results">Results
                         <span>&nbsp;1 - 14&nbsp;</span>
@@ -51,7 +50,6 @@ export default function Search() {
                         <li><a className={`button-hr ` + (!sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>Old to new</a></li>
                     </ul>
                 </div>
-
             </div>
 
             <div style={{ padding: 10 }}>
@@ -137,33 +135,31 @@ export default function Search() {
                                 </div>
                             </div>
 
-                            <nav aria-label="pagination">
-                                <ul class="pagination uw-pagination">
+                            <div >
+                                <nav aria-label="pagination">
+                                    <ul class="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
+                                        <Group>
+                                            <li class="pagination-previous button backward">
+                                                <a aria-label="Previous Page">
+                                                    <span class="icon--chevron-left"></span>
+                                                    Previous<span class="show-for-sr">page</span>
+                                                </a>
+                                            </li>
+                                            <li><a aria-label="Page 1">1</a></li>
+                                            <li class="current"><span class="show-for-sr">You're on page</span>2</li>
+                                            <li><a aria-label="Page 3">3</a></li>
+                                            <li><a aria-label="Page 4">4</a></li>
+                                            <li class="pagination-next button">
+                                                <a aria-label="Next Page">
+                                                    Next<span class="show-for-sr">page</span>
+                                                    <span class="icon--chevron-right"></span>
+                                                </a>
+                                            </li>
 
-                                    <li class="pagination-previous button backward">
-                                        <a href="#" aria-label="Previous Page">
-                                            <span class="icon--chevron-left"></span>
-                                            Previous<span class="show-for-sr">page</span>
-                                        </a>
-                                    </li>
-
-                                    <li><a href="#" aria-label="Page 1">1</a></li>
-
-                                    <li class="current"><span class="show-for-sr">You're on page</span>2</li>
-
-                                    <li><a href="#" aria-label="Page 3">3</a></li>
-
-                                    <li><a href="#" aria-label="Page 4">4</a></li>
-
-                                    <li class="pagination-next button">
-                                        <a href="#" aria-label="Next Page">
-                                            Next<span class="show-for-sr">page</span>
-                                            <span class="icon--chevron-right"></span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </nav>
+                                        </Group>
+                                    </ul>
+                                </nav>
+                            </div>
 
                         </div>
                     </div>
