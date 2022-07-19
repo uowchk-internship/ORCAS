@@ -9960,7 +9960,7 @@ hr {
 dl,
 ol,
 ul {
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     list-style-position: outside;
     line-height: 1.5
 }

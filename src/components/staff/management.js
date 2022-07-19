@@ -45,24 +45,9 @@ export default function Management() {
           </button>
         </div>
       </section>
-      <div class="uw-search--sort cell large-12">
-        <div>
-          <p class="results">Results
-            <span>&nbsp;1 - 14&nbsp;</span>
-            of about
-            <span> 56 </span>
-            for "keyword"</p>
-        </div>
-        <div class="uw-search--sort-by">
-          <ul>
-            <li><a className={`button-hr ` + (sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>New to old</a></li>
-            <li><a className={`button-hr ` + (!sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>Old to new</a></li>
-          </ul>
-        </div>
-      </div>
 
-      {/* Search filters */}
-      <Accordion multiple initialItem={0}>
+            {/* Search filters */}
+            <Accordion multiple initialItem={0}>
         <Accordion.Item label="Search Filters" >
           <p>
             <b>Subjects:</b>
@@ -99,6 +84,26 @@ export default function Management() {
           </p>
         </Accordion.Item>
       </Accordion>
+
+
+
+
+      <div class="uw-search--sort cell large-12">
+        <div>
+          <p class="results">Results
+            <span>&nbsp;1 - 14&nbsp;</span>
+            of about
+            <span> 56 </span>
+            for "keyword"</p>
+        </div>
+        <div class="uw-search--sort-by">
+          <ul>
+            <li><a className={`button-hr ` + (sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>New to old</a></li>
+            <li><a className={`button-hr ` + (!sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>Old to new</a></li>
+          </ul>
+        </div>
+      </div>
+
 
 
 

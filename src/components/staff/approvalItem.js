@@ -21,12 +21,12 @@ export default function ApprovalItem(props) {
                 </td>
                 <td>
                     <div style={{ textAlign: "center" }}>
-                        <Button style={{ backgroundColor: "#FFFFFF", color: "#0033FF", borderRadius: 5, marginRight: 10 }}
-                            position="center" compact size="md" variant="outline">
+                        <Button style={{ backgroundColor: "#0033FF", color: "#ffffff", borderRadius: 5, marginRight: 10 }}
+                            position="center" compact size="md">
                             Approve
                         </Button>
-                        <Button style={{ backgroundColor: "#ffffff", color: "#ED0A00", borderRadius: 5 }}
-                            position="center" compact size="md" variant="outline" color="red">
+                        <Button style={{ backgroundColor: "#ED0A00", color: "#FFFFFF", borderRadius: 5 }}
+                            position="center" compact size="md" >
                             Reject
                         </Button>
                     </div>
