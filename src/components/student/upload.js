@@ -5,7 +5,7 @@ import { Chips, Chip, createStyles, Button, Modal, Group } from '@mantine/core';
 import UploadResultFail from './uploadResultFail';
 import UploadResultSuccess from './uploadResultSuccess';
 
-import { newMaterial } from '../../functions/materials'
+import { saveMaterial } from '../../functions/materials'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   iconWrapper: {
@@ -57,7 +57,7 @@ export default function UploadComponent() {
       status: "pending"
     }
 
-    let result = await newMaterial(data)
+    let result = await saveMaterial(data)
     if (result === "done") {
       setSuccess(true)
     } else {

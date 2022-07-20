@@ -1,12 +1,57 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react'
 import { SegmentedControl, Button, Modal, Group } from '@mantine/core';
 
+import { getAllMaterials } from '../../functions/materials'
 import MaterialDetailEdit from './materialDetailEdit'
 import ApprovalItem from './approvalItem'
+import PageNumber from '../page'
 
-export default function Consorship() {
-  const [filter, setFilter] = useState("all")
+
+export default function Censorship() {
+  const [filter, setFilter] = useState("pending")
+  const [oldFilter, setOldFilter] = useState("pending")
   const [showDetailView, setShowDetailView] = useState(false)
+  const [detailViewItem, setDetailViewItem] = useState({})
+
+  const [fetched, setFetched] = useState(false)
+  const [materials, setMaterials] = useState([])
+  const [filteredMaterials, setFilteredMaterials] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPage, setTotalPage] = useState(1)
+
+  const filterMaterials = () => {
+    let tempFiltered = []
+    for (const item of materials) {
+      if (filter === "all" || item.status === filter) {
+        tempFiltered.push(item)
+      }
+    }
+    setFilteredMaterials(tempFiltered)
+    setCurrentPage(1)
+    setTotalPage(Math.ceil(tempFiltered.length / 10))
+  }
+
+
+
+  useEffect(() => {
+    const fetchMaterials = async () => {
+      let result = await getAllMaterials()
+      setMaterials(result)
+      setFetched(true)
+      filterMaterials()
+
+    }
+
+    if (!fetched || materials.length === 0) {
+      fetchMaterials()
+    }
+
+    if (oldFilter != filter) {
+      filterMaterials()
+      setOldFilter(filter)
+    }
+
+  })
 
   return (
     <>
@@ -18,7 +63,7 @@ export default function Consorship() {
           data={[
             { label: 'All', value: 'all' },
             { label: 'Pending', value: 'pending' },
-            { label: 'Approved', value: 'approved' },
+            { label: 'Approved', value: 'approve' },
             { label: 'Rejected', value: 'reject' },
           ]} />
 
@@ -37,33 +82,34 @@ export default function Consorship() {
 
         <tbody>
 
-          <ApprovalItem setShowDetailView={setShowDetailView} />
-          <ApprovalItem setShowDetailView={setShowDetailView} />
+          {(filteredMaterials.length > 0) ?
+            [...filteredMaterials].map((item, i) => {
+              if ((i <= (currentPage * 10 - 1)) && (i >= ((currentPage - 1) * 10)))
+                return <ApprovalItem data={item} key={i}
+                  setShowDetailView={setShowDetailView}
+                  setDetailViewItem={setDetailViewItem} />
+
+              // <SearchItem data={item} key={i} />
+            }) :
+            <>
+              <tr>
+                <td colSpan="4" >No result</td>
+              </tr>
+            </>
+          }
 
         </tbody>
       </table>
 
       <div >
         <nav aria-label="pagination">
-          <ul class="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
+          <ul className="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
             <Group>
-              <li class="pagination-previous button backward">
-                <a aria-label="Previous Page">
-                  <span class="icon--chevron-left"></span>
-                  Previous<span class="show-for-sr">page</span>
-                </a>
-              </li>
-              <li><a aria-label="Page 1">1</a></li>
-              <li class="current"><span class="show-for-sr">You're on page</span>2</li>
-              <li><a aria-label="Page 3">3</a></li>
-              <li><a aria-label="Page 4">4</a></li>
-              <li class="pagination-next button">
-                <a aria-label="Next Page">
-                  Next<span class="show-for-sr">page</span>
-                  <span class="icon--chevron-right"></span>
-                </a>
-              </li>
-
+              <PageNumber
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalPage={totalPage}
+              />
             </Group>
           </ul>
         </nav>
@@ -77,7 +123,7 @@ export default function Consorship() {
         onClose={() => setShowDetailView(false)}
       >
 
-        <MaterialDetailEdit />
+        <MaterialDetailEdit detailViewItem={detailViewItem} />
       </Modal>
 
     </>

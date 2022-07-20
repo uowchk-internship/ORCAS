@@ -24,6 +24,28 @@ export const getWithKeywordsAndStatus = async (status, keyword) => {
     return result
 }
 
+export const getAllMaterials = async () => {
+    let url = `https://tomcat.johnnyip.com/orcas/api/material/all`
+
+    let result = [];
+    await axios.get(url)
+        .then((response) => {
+            if (response.status == 200) {
+                result = response.data
+            } else {
+                result = []
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            result = []
+        })
+
+    return result
+}
+
+
+
 export const addViewCount = async (data) => {
     data.views++;
     let url = `https://tomcat.johnnyip.com/orcas/api/material/`
@@ -34,7 +56,7 @@ export const addViewCount = async (data) => {
         })
 }
 
-export const newMaterial = async (data) => {
+export const saveMaterial = async (data) => {
     let result = ""
     let url = `https://tomcat.johnnyip.com/orcas/api/material/`
     await axios.post(url, data)
