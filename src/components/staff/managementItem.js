@@ -1,25 +1,26 @@
-import { Button } from '@mantine/core';
 import { useState } from 'react'
+import { Button, Modal, Group } from '@mantine/core';
 
 import { removeMaterial } from '../../functions/materials'
+
 
 export default function ApprovalItem(props) {
     const setShowDetailView = props.setShowDetailView
     const setDetailViewItem = props.setDetailViewItem
     let data = props.data
+    let id = data.id
 
+    const [showModal, setShowModal] = useState(false)
     const [removed, setRemoved] = useState(false)
 
-    const removeMaterial = async () => {
-        let response = confirm("Are you sure to remove this material?")
-        if (response) {
-            data.id = 0
-            setRemoved(true)
-        }
+    const confirmRemoveMaterial = async () => {
+        await removeMaterial(id)
+        // data.id = 0
+        setRemoved(true)
     }
 
 
-    if (data.id !== 0) {
+    if (!removed) {
         return (
             <>
                 <tr>
@@ -43,13 +44,37 @@ export default function ApprovalItem(props) {
                         <div style={{ textAlign: "center" }}>
                             <Button style={{ backgroundColor: "#ED0A00", color: "#ffffff", borderRadius: 5 }}
                                 position="center" compact size="md" color="red"
-                                onClick={() => removeMaterial()}>
+                                onClick={() => setShowModal(true)}>
                                 Remove
                             </Button>
                         </div>
 
                     </td>
                 </tr>
+
+                <Modal centered
+                    opened={showModal}
+                    onClose={() => setShowModal(false)}
+                    withCloseButton={false}
+                    title="Are you sure you want to remove this material?"
+                >
+                    <Group grow>
+                        <Button style={{ backgroundColor: "#7A838B", color: "#ffffff", borderRadius: 5 }}
+                            position="center" size="md" color="gray"
+                            onClick={() => setShowModal(false)}>
+                            Cancel
+                        </Button>
+                        <Button style={{ backgroundColor: "#ED0A00", color: "#ffffff", borderRadius: 5 }}
+                            position="center" size="md" color="red"
+                            onClick={() => {
+                                confirmRemoveMaterial();
+                                setShowModal(false)
+                            }}>
+                            Remove
+                        </Button>
+
+                    </Group>
+                </Modal>
             </>
         )
 

@@ -1,5 +1,8 @@
+import { useState } from 'react'
 
 const Header = () => {
+    const [chosenTab, setChosenTab] = useState(0)
+
     return (
         <>
             <meta charSet="utf-8" />
@@ -196,14 +199,50 @@ const Header = () => {
                                         <ul className="main-menu">
                                             <li>
                                                 <a
-                                                    className="uw-main-menu-item uw-has-submenu"
-                                                    href="https://www.uowchk.edu.hk/study-at-uowchk/"
+                                                    // className="uw-main-menu-item uw-has-submenu"
+                                                    className={(chosenTab === 1) ?
+                                                        "uw-main-menu-item uw-has-submenu submenu-open" :
+                                                        "uw-main-menu-item uw-has-submenu"}
+                                                    onClick={() => setChosenTab(1)}
                                                 >Study at UOWCHK</a>
+                                                <div
+                                                    className={(chosenTab === 1) ?
+                                                        "uw-main-submenu uw-main-submenu-open" :
+                                                        "uw-main-submenu"}
+                                                >
+                                                    <div className="grid-container">
+                                                        <h2>Study at UOWCHK</h2>
+                                                        <ul>
+                                                            <li><a tabIndex="0" href="/study-at-uowchk/why-uowchk/"> Why study at UOWCHK? </a></li>
+                                                            <li><a tabIndex="0" href="/study-at-uowchk/find-programmes/"> Programme of study </a></li>
+                                                            <li><a tabIndex="0" href="/study-at-uowchk/admission-requirements/"> Admission requirements </a></li>
+                                                            <li><a tabIndex="0" href="/study-at-uowchk/your-future-awaits/#d.en.104162"> How to apply </a></li>
+                                                            <li><a tabIndex="0" href="/study-at-uowchk/fees-and-financial-assistance/"> Fees and financial assistance </a></li>
+                                                            <li><a tabIndex="0" href="/study-at-uowchk/campuses-and-facilities/"> Campuses and facilities </a></li>
+                                                            <li><a tabIndex="0" href="/study-at-uowchk/international-students/"> International Students </a></li>
+                                                            <li><a tabIndex="0" href="/contact-us/"> Contact us </a></li>
+                                                            <li><a tabIndex="0" href="/study-at-uowchk/what-graduates-say/"> What Graduates Say </a></li>
+                                                        </ul>
+
+                                                        <a href="/study-at-uowchk/" className="subnav-cta" tabIndex="0">Study at UOWCHK </a>
+
+                                                        <button className="close-nav" tabIndex="0">Close</button>
+                                                    </div>
+                                                </div>
                                             </li>
                                             <li>
-                                                <a className="uw-main-menu-item uw-has-submenu" href="https://www.uowchk.edu.hk/about-us/"
+                                                <a
+                                                    className={(chosenTab === 2) ?
+                                                        "uw-main-menu-item uw-has-submenu submenu-open" :
+                                                        "uw-main-menu-item uw-has-submenu"}
+
+                                                    onClick={() => setChosenTab(2)}
                                                 >About us</a>
-                                                <div className="uw-main-submenu">
+                                                <div
+                                                    className={(chosenTab === 2) ?
+                                                        "uw-main-submenu uw-main-submenu-open" :
+                                                        "uw-main-submenu"}
+                                                >
                                                     <div className="grid-container">
                                                         <h2>About us</h2>
                                                         <ul>
@@ -283,14 +322,23 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li className="">
-                                                <a href="https://www.uowchk.edu.hk/news--events/" className="uw-main-menu-item"
-                                                ><span>News &amp; Events</span></a>
+                                            <li>
+                                                <a
+                                                    href='https://www.uowchk.edu.hk/news--events/'
+                                                ><span>&nbsp; News &amp; Events&nbsp;</span></a>
                                             </li>
                                             <li>
-                                                <a className="uw-main-menu-item uw-has-submenu" href=""
+                                                <a
+                                                    className={(chosenTab === 3) ?
+                                                        "uw-main-menu-item uw-has-submenu submenu-open" :
+                                                        "uw-main-menu-item uw-has-submenu"}
+                                                    onClick={() => setChosenTab(3)}
                                                 >Quick Links</a>
-                                                <div className="uw-main-submenu">
+                                                <div
+                                                    className={(chosenTab === 3) ?
+                                                        "uw-main-submenu uw-main-submenu-open" :
+                                                        "uw-main-submenu"}
+                                                >
                                                     <div className="grid-container">
                                                         <h2>Quick Links</h2>
                                                         <ul>
@@ -372,9 +420,17 @@ const Header = () => {
                                                 </div>
                                             </li>
                                             <li>
-                                                <a className="uw-main-menu-item uw-has-submenu" href=""
+                                                <a
+                                                    className={(chosenTab === 4) ?
+                                                        "uw-main-menu-item uw-has-submenu submenu-open" :
+                                                        "uw-main-menu-item uw-has-submenu"}
+                                                    onClick={() => setChosenTab(4)}
                                                 >學院課程</a>
-                                                <div className="uw-main-submenu">
+                                                <div
+                                                    className={(chosenTab === 4) ?
+                                                        "uw-main-submenu uw-main-submenu-open" :
+                                                        "uw-main-submenu"}
+                                                >
                                                     <div className="grid-container">
                                                         <h2>學院課程</h2>
                                                         <ul>
@@ -439,9 +495,19 @@ const Header = () => {
                                                 </div>
                                             </li>
                                             <li>
-                                                <a className="uw-main-menu-item uw-has-submenu" href=""
+                                                <a
+                                                    className={(chosenTab === 5) ?
+                                                        "uw-main-menu-item uw-has-submenu submenu-open" :
+                                                        "uw-main-menu-item uw-has-submenu"}
+
+                                                    onClick={() => setChosenTab(5)}
                                                 >關於我們</a>
-                                                <div className="uw-main-submenu">
+                                                <div
+                                                    className={(chosenTab === 5) ?
+                                                        "uw-main-submenu uw-main-submenu-open" :
+                                                        "uw-main-submenu"}
+
+                                                >
                                                     <div className="grid-container">
                                                         <h2>關於我們</h2>
                                                         <ul>

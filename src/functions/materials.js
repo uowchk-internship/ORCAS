@@ -78,8 +78,8 @@ export const saveMaterial = async (data) => {
 
 export const removeMaterial = async (id) => {
     let result = ""
-    let url = `https://tomcat.johnnyip.com/orcas/api/material/remove/${id}`
-    await axios.post(url, data)
+    let url = `https://tomcat.johnnyip.com/orcas/api/material/delete/${id}`
+    await axios.get(url)
         .then((response) => {
             if (response.status == 200) {
                 result = "done"
