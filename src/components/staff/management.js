@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SegmentedControl, Chips, Chip, Image, Button, Modal, Group, Accordion, createStyles } from '@mantine/core';
 
+import { getAllMaterials } from '../../functions/materials'
 import MaterialDetailEdit from './materialDetailEdit'
 import ManagementItem from './managementItem'
+import PageNumber from '../page'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
   iconWrapper: {
@@ -25,11 +27,102 @@ export default function Management() {
 
   const [status, setStatus] = useState("all")
   const [showDetailView, setShowDetailView] = useState(false)
+  const [detailViewItem, setDetailViewItem] = useState({})
 
-  const [chosenTab, setChosenTab] = useState(["journals", "artsHumanities", "socialScience"])
-  const [yearFilter, setYearFilter] = useState("all")
-  const [subjectFilter, setSubjectFilter] = useState(["all", "scienceTechnology", "artsHumanities", "socialScience", "business", "others"])
+  const [keyword, setKeyword] = useState("")
+  const [oldKeyword, setOldKeyword] = useState("")
+
+  //filters
+  const [chosenTab, setChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
+  const [subjectFilter, setSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
   const [sortNew, setSortNew] = useState(false)
+
+  //for monitoring changes in filter
+  const [oldChosenTab, setOldChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
+  const [oldSubjectFilter, setOldSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
+  const [oldSortNew, setOldSortNew] = useState(false)
+
+
+  const [fetched, setFetched] = useState(false)
+  const [materials, setMaterials] = useState([])
+  const [filteredMaterials, setFilteredMaterials] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPage, setTotalPage] = useState(1)
+
+  const checkFilterChanged = () => {
+    let result = true;
+
+    if (chosenTab !== oldChosenTab) {
+      setOldChosenTab(chosenTab)
+    } else if (subjectFilter !== oldSubjectFilter) {
+      setOldSubjectFilter(subjectFilter)
+    } else if (sortNew !== oldSortNew) {
+      setOldSortNew(sortNew)
+    } else {
+      result = false
+    }
+
+    return result
+  }
+
+  const checkFilterMatch = (item) => {
+    let result = false;
+
+    //checking type
+    for (const tab of chosenTab)
+      if (item.type.includes(tab))
+        result = true;
+
+    if (result) {
+      result = false;
+
+      //checking subject
+      for (const subject of subjectFilter)
+        if (item.subject.includes(subject))
+          result = true;
+    }
+
+    return result;
+  }
+
+  const filterAndSort = () => {
+    //filter and sort the array
+    let filtered = []
+    for (const item of materials) {
+      if ((keyword === "" || item.topic.toLowerCase().includes(keyword.toLocaleLowerCase())) && checkFilterMatch(item)) {
+        filtered.push(item)
+      }
+    }
+
+    if (sortNew) {
+      filtered.sort((a, b) => b.publishYear - a.publishYear)
+    } else {
+      filtered.sort((a, b) => a.publishYear - b.publishYear)
+    }
+
+    setFilteredMaterials(filtered)
+    setCurrentPage(1)
+    setTotalPage(Math.ceil(filtered.length / 10))
+  }
+
+  const fetchMaterials = async (keyword_) => {
+    let result = await getAllMaterials()
+    setMaterials(result)
+    setFetched(true)
+  }
+
+  useEffect(() => {
+
+    if (!fetched) {
+      fetchMaterials("")
+      filterAndSort()
+    }
+
+    if (checkFilterChanged()) {
+      filterAndSort()
+    }
+
+  })
 
 
   return (
@@ -38,65 +131,70 @@ export default function Management() {
       {/* Search area */}
       <section id="search-bar" >
         <div id="search-container">
-          <input type="text" placeholder="Please input the keywords" name="search" />
-          <button type="submit" style={{ height: 39 }}>
-            {/* <i className="fa fa-search"></i> */}
+          <input value={keyword} onChange={(e) => {
+            setKeyword(e.target.value);
+            fetchMaterials(e.target.value);
+            filterAndSort()
+          }}
+            type="text" placeholder="Please input the keywords" name="search" />
+          <a onClick={() => setFetched(false)}>
             <Image src="/images/search.png" height={39} width={39} />
-          </button>
+          </a>
         </div>
       </section>
 
       {/* Search filters */}
-      <Accordion multiple initialItem={0}>
+      <Accordion multiple initialItem={-1}>
         <Accordion.Item label="Search Filters" >
-          <p>
-            <b>Subjects:</b>
-            <div>
-              <Chips value={subjectFilter} onChange={setSubjectFilter} multiple size="md" radius="sm" classNames={classes} >
-                <Chip value="all">All</Chip>
-                <Chip value="scienceTechnology">Science & Technology</Chip>
-                <Chip value="artsHumanities">Arts & Humanities</Chip>
-                <Chip value="socialScience">Social Science</Chip>
-                <Chip value="business">Business</Chip>
-                <Chip value="others">Others</Chip>
-              </Chips>
-            </div>
 
-            <b>Type:</b>
-            <div >
-              <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
-                <Chip value="journals">Journals Articles (100)</Chip>
-                <Chip value="newspaper">Newspapers Articles (100)</Chip>
-                <Chip value="video">Video (100)</Chip>
-              </Chips>
-            </div>
+          <b>Subjects:</b>
+          <div>
+            <Chips value={subjectFilter} onChange={setSubjectFilter} multiple size="md" radius="sm" classNames={classes} >
+              <Chip value="Science & Technology">Science & Technology</Chip>
+              <Chip value="Arts & Humanities">Arts & Humanities</Chip>
+              <Chip value="Social Science">Social Science</Chip>
+              <Chip value="Business">Business</Chip>
+              <Chip value="Others">Others</Chip>
+            </Chips>
+          </div>
 
-            <b>Status:</b>
-            <div >
-              <Chips value={status} onChange={setStatus} size="md" radius="sm" classNames={classes}>
-                <Chip value="all">All</Chip>
-                <Chip value="pending">Pending</Chip>
-                <Chip value="approve">Approved</Chip>
-                <Chip value="reject">Rejected</Chip>
-              </Chips>
-            </div>
+          <b>Type:</b>
+          <div >
+            <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
+              <Chip value="Journals Article">Journals Articles</Chip>
+              <Chip value="Newspapers Article">Newspapers Articles</Chip>
+              <Chip value="Video">Video</Chip>
+            </Chips>
+          </div>
 
-          </p>
+          <b>Status:</b>
+          <div >
+            <Chips value={status} onChange={setStatus} size="md" radius="sm" classNames={classes}>
+              <Chip value="all">All</Chip>
+              <Chip value="pending">Pending</Chip>
+              <Chip value="approve">Approved</Chip>
+              <Chip value="reject">Rejected</Chip>
+            </Chips>
+          </div>
         </Accordion.Item>
       </Accordion>
 
 
 
 
-      <div class="uw-search--sort cell large-12">
+      <div className="uw-search--sort cell large-12">
         <div>
-          <p class="results">Results
-            <span>&nbsp;1 - 14&nbsp;</span>
-            of about
-            <span> 56 </span>
-            for "keyword"</p>
+          <p className="results">
+            Results &nbsp;
+            <b>
+              {(currentPage - 1) * 10 + 1} -&nbsp;
+              {(filteredMaterials.length < currentPage * 10) ?
+                filteredMaterials.length : currentPage * 10}
+            </b>
+            &nbsp;of <b>{filteredMaterials.length}</b> for "<b>{keyword}</b>"
+          </p>
         </div>
-        <div class="uw-search--sort-by">
+        <div className="uw-search--sort-by">
           <ul>
             <li><a className={`button-hr ` + (sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>New to old</a></li>
             <li><a className={`button-hr ` + (!sortNew ? 'selected' : "")} onClick={() => { setSortNew(!sortNew) }}>Old to new</a></li>
@@ -119,32 +217,34 @@ export default function Management() {
         </thead>
 
         <tbody>
-          <ManagementItem setShowDetailView={setShowDetailView} />
-          <ManagementItem setShowDetailView={setShowDetailView} />
+          {(filteredMaterials.length > 0) ?
+            [...filteredMaterials].map((item, i) => {
+              if ((i <= (currentPage * 10 - 1)) && (i >= ((currentPage - 1) * 10)))
+                return <ManagementItem data={item} key={i}
+                  setShowDetailView={setShowDetailView}
+                  setDetailViewItem={setDetailViewItem} />
+
+              // <SearchItem data={item} key={i} />
+            }) :
+            <>
+              <tr>
+                <td colSpan="4" >No result</td>
+              </tr>
+            </>
+          }
+
         </tbody>
       </table>
 
       <div >
         <nav aria-label="pagination">
-          <ul class="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
+          <ul className="pagination uw-pagination" style={{ textAlign: "center", width: "100%" }}>
             <Group>
-              <li class="pagination-previous button backward">
-                <a aria-label="Previous Page">
-                  <span class="icon--chevron-left"></span>
-                  Previous<span class="show-for-sr">page</span>
-                </a>
-              </li>
-              <li><a aria-label="Page 1">1</a></li>
-              <li class="current"><span class="show-for-sr">You're on page</span>2</li>
-              <li><a aria-label="Page 3">3</a></li>
-              <li><a aria-label="Page 4">4</a></li>
-              <li class="pagination-next button">
-                <a aria-label="Next Page">
-                  Next<span class="show-for-sr">page</span>
-                  <span class="icon--chevron-right"></span>
-                </a>
-              </li>
-
+              <PageNumber
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalPage={totalPage}
+              />
             </Group>
           </ul>
         </nav>
@@ -159,7 +259,7 @@ export default function Management() {
         onClose={() => setShowDetailView(false)}
       >
 
-        <MaterialDetailEdit />
+        <MaterialDetailEdit detailViewItem={detailViewItem} />
       </Modal>
 
     </>

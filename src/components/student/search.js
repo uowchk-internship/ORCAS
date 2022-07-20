@@ -118,8 +118,6 @@ export default function Search() {
         setFetched(true)
     }
 
-
-
     useEffect(() => {
 
         if (!fetched) {
