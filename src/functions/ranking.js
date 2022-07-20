@@ -2,7 +2,7 @@ const axios = require('axios');
 
 export const getMonths = async () => {
 
-    let url = `https://tomcat.johnnyip.com/orcas/api/ranking/all`
+    let url = `https://tomcat.johnnyip.com/orcas/api/ranking/allRankings`
 
     let result = [];
     await axios.get(url)

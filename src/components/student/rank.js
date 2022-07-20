@@ -7,6 +7,9 @@ import { getMonths } from '../../functions/ranking'
 export default function RankComponent() {
   const [fetched, setFetched] = useState(false)
 
+  //Ranking data
+  const [allRankings, setAllRankings] = useState({})
+
   const [selectedMonth, setSelectedMonth] = useState("")
   const [months, setMonths] = useState([
     { value: '05-2022', label: '05-2022' }
@@ -16,16 +19,31 @@ export default function RankComponent() {
     const fetchMonths = async () => {
       let result = await getMonths();
 
-      //Put into select list
-      let items = []
-      for (let item of result) {
-        items.push({ value: item, label: item })
+      let completeRankings = {}
+      let completeMonths = [];
+      for (let rankOfMonth of result) {
+
+        //save the month name
+        let currentMonthName = rankOfMonth[rankOfMonth.length - 1].month
+        if (currentMonthName !== "overall") { completeMonths.push(currentMonthName) }
+
+        //get fitst 5 elements
+        let firstFiveRank = []
+        for (const [i, value] of rankOfMonth.entries()) {
+          if (i < 5){
+            firstFiveRank.push(value)
+          }
+        }
+
+        //save object
+        completeRankings[currentMonthName] = firstFiveRank
       }
 
-      setSelectedMonth(result[result.length - 1])
-      setMonths(items)
+      // //Put into select list
+      setSelectedMonth(completeMonths[completeMonths.length - 1])
+      setMonths(completeMonths)
+      setAllRankings(completeRankings)
       setFetched(true)
-
     }
 
     if (!fetched) {
@@ -48,45 +66,45 @@ export default function RankComponent() {
           style={{ paddingLeft: 50, paddingRight: 50 }}
           position="center"
           value={selectedMonth}
+          onChange={setSelectedMonth}
           data={months}
         />
 
       </div>
 
-      <div style={{ display: "inline-block", width: "50%", paddingLeft: 20, paddingRight: 20 }} >
+      <div style={{ display: "inline-block", width: "50%", paddingLeft: 20, paddingRight: 20, verticalAlign: "top" }} >
         <table>
           <thead>
             <tr>
               <td>Rank</td>
-              <td>Student Name</td>
+              <td>Student Email</td>
               <td>Quantity</td>
             </tr>
           </thead>
           <tbody>
-            <RankItem />
-            <RankItem />
-            <RankItem />
-            <RankItem />
-            <RankItem />
+            {(allRankings[selectedMonth] !== undefined) ?
+              [...allRankings[selectedMonth]].map((item, i) => {
+                return <RankItem data={item} key={i} sequence={i} />
+              }) : <></>}
+
           </tbody>
         </table>
       </div>
 
-      <div style={{ display: "inline-block", width: "50%", paddingLeft: 20, paddingRight: 20 }} >
+      <div style={{ display: "inline-block", width: "50%", paddingLeft: 20, paddingRight: 20, verticalAlign: "top" }} >
         <table>
           <thead>
             <tr>
               <td>Rank</td>
-              <td>Student Name</td>
+              <td>Student Email</td>
               <td>Quantity</td>
             </tr>
           </thead>
           <tbody>
-            <RankItem />
-            <RankItem />
-            <RankItem />
-            <RankItem />
-            <RankItem />
+            {(allRankings["overall"] !== undefined) ?
+              [...allRankings["overall"]].map((item, i) => {
+                return <RankItem data={item} key={i} sequence={i} />
+              }) : <></>}
           </tbody>
         </table>
       </div>
