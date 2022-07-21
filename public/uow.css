@@ -1476,7 +1476,11 @@ screen and (min-width:48em) {
 
 @font-face {
     font-family: WwwUowEduAu;
-    src: url('https://www.uowchk.edu.hk/site-assets/styles/fonts/uw-icons.eot') format("embedded-opentype"), url('https://www.uowchk.edu.hk/site-assets/styles/fonts/uw-icons.woff2') format("woff2"), url('https://www.uowchk.edu.hk/site-assets/styles/fonts/uw-icons.woff') format("woff"), url('https://www.uowchk.edu.hk/site-assets/styles/fonts/uw-icons.ttf') format("truetype"), url('https://www.uowchk.edu.hk/site-assets/styles/fonts/uw-icons.otf') format("opentype");
+    src: url('/fonts/uw-icons.eot') format("embedded-opentype"),
+        url('/fonts/uw-icons.woff2') format("woff2"),
+        url('/fonts/uw-icons.woff') format("woff"),
+        url('/fonts/uw-icons.ttf') format("truetype"),
+        url('/fonts/uw-icons.otf') format("opentype");
     font-weight: 400;
     font-style: normal
 }
@@ -1519,6 +1523,7 @@ screen and (min-width:48em) {
 .icon--chevron-left-after::after {
     content: ""
 }
+
 .icon--chevrons-right::before {
     content: ""
 }
@@ -16825,6 +16830,7 @@ screen and (min-width:64em) {
         display: inline-block
     }
 }
+
 /* 
 .radio-list input[type=checkbox]+label,
 .radio-list input[type=radio]+label {
