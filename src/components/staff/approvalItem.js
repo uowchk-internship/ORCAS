@@ -1,9 +1,12 @@
 import { Button } from '@mantine/core';
 import { useState } from 'react'
+import moment from 'moment';
 
 import { saveMaterial } from '../../functions/materials'
 
 export default function ApprovalItem(props) {
+    moment().format();
+
     const setShowDetailView = props.setShowDetailView
     const setDetailViewItem = props.setDetailViewItem
     let data = props.data
@@ -11,7 +14,8 @@ export default function ApprovalItem(props) {
 
     const saveStatus = async (option) => {
         data.status = option
-        data.rankingMonth = ""
+        data.rankingMonth = (option ==="approve") ? moment(new Date()).format("MM-YYYY"):""
+        data.publishDate = new Date()
         setUpdateView(!updateView)
         await saveMaterial(data)
     }

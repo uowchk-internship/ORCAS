@@ -18,26 +18,30 @@ export default function RankComponent() {
   useEffect(() => {
     const fetchMonths = async () => {
       let result = await getMonths();
+      console.log(result)
 
       let completeRankings = {}
       let completeMonths = [];
       for (let rankOfMonth of result) {
+        if (rankOfMonth.length > 0) {
+          //save the month name
+          let currentMonthName = rankOfMonth[rankOfMonth.length - 1].month
+          if (currentMonthName !== "overall") { completeMonths.push(currentMonthName) }
 
-        //save the month name
-        let currentMonthName = rankOfMonth[rankOfMonth.length - 1].month
-        if (currentMonthName !== "overall") { completeMonths.push(currentMonthName) }
-
-        //get fitst 5 elements
-        let firstFiveRank = []
-        for (const [i, value] of rankOfMonth.entries()) {
-          if (i < 5){
-            firstFiveRank.push(value)
+          //get fitst 5 elements
+          let firstFiveRank = []
+          for (const [i, value] of rankOfMonth.entries()) {
+            if (i < 5) {
+              firstFiveRank.push(value)
+            }
           }
+          //save object
+          completeRankings[currentMonthName] = firstFiveRank
         }
-
-        //save object
-        completeRankings[currentMonthName] = firstFiveRank
       }
+
+      //sort with the month name
+      completeMonths.sort()
 
       // //Put into select list
       setSelectedMonth(completeMonths[completeMonths.length - 1])
