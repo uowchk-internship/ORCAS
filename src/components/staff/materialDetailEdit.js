@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Datetime from 'react-datetime';
 import moment from 'moment';
-import { Chips, Chip, createStyles, Button, Modal, Group } from '@mantine/core';
+import { Chips, Chip, createStyles, Button, Modal, SegmentedControl, Group } from '@mantine/core';
 
 import UploadResultFail from '../student/uploadResultFail';
 import UploadResultSuccess from '../student/uploadResultSuccess';
@@ -28,12 +28,12 @@ export default function MaterialDetailEdit(props) {
     moment().format();
 
     let detailViewItem = props.detailViewItem;
-    console.log(detailViewItem)
     // console.log(detailViewItem.subject.split(","))
 
     const { classes } = useStyles();
 
     const [showPopup, setShowPopup] = useState(false);
+    const [submittable, setSubmittable] = useState(false);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(true);
 
@@ -44,9 +44,10 @@ export default function MaterialDetailEdit(props) {
     const [publishYear, setPublishYear] = useState(moment(new Date()).year((detailViewItem.publishYear !== undefined) ? detailViewItem.publishYear.toString() : ""))
     const [publisher, setPublisher] = useState((detailViewItem.publisher !== undefined) ? detailViewItem.publisher : "")
     const [subjects, setSubjects] = useState((detailViewItem.subject !== undefined) ? detailViewItem.subject.split(",") : [])
-    const [types, setTypes] = useState((detailViewItem.type !== undefined) ? detailViewItem.type.split(",") : [])
+    const [types, setTypes] = useState((detailViewItem.type !== undefined) ? detailViewItem.type : "")
     const [url, setUrl] = useState((detailViewItem.url !== undefined) ? detailViewItem.url : "")
     const [abstract, setAbstract] = useState((detailViewItem.materialAbstract !== undefined) ? detailViewItem.materialAbstract : "")
+    const [status, setStatus] = useState((detailViewItem.status !== undefined) ? detailViewItem.status : "")
 
     const submitForm = async () => {
         setLoading(true)
@@ -62,7 +63,7 @@ export default function MaterialDetailEdit(props) {
             type: types.toString(),
             url: url,
             views: detailViewItem.views,
-            status: detailViewItem.status,
+            status: status,
             materialAbstract: abstract
         }
 
@@ -77,6 +78,18 @@ export default function MaterialDetailEdit(props) {
 
     }
 
+    useEffect(() => {
+        //Check if all required fields are entered by user.
+        if (email !== "" &&
+            topic !== "" &&
+            subjects.length !== 0 &&
+            types !== "" &&
+            url !== "" &&
+            abstract !== "") {
+            setSubmittable(true)
+        }
+
+    })
 
 
     return (
@@ -127,7 +140,7 @@ export default function MaterialDetailEdit(props) {
                 <br />
 
                 <label >Resources Type: (you can choose more than one) <span style={{ color: "#ED0A00" }}>*</span></label>
-                <Chips value={types} onChange={setTypes} multiple size="md" radius="sm" classNames={classes}>
+                <Chips value={types} onChange={setTypes} size="md" radius="sm" classNames={classes}>
                     <Chip value="Journal Article">Journal Article</Chip>
                     <Chip value="Newspaper Article">Newspaper Article</Chip>
                     <Chip value="Video">Video</Chip>
@@ -157,12 +170,27 @@ export default function MaterialDetailEdit(props) {
                     Please input one link per upload only. <br />
                     Please double check link is valid before submission.<br />
                 </p>
+                
+                <Group position="center">
+                    <SegmentedControl
+                        fullWidth
+                        size="md"
+                        value={status}
+                        onChange={setStatus}
+                        data={[
+                            { label: 'Pending', value: 'pending' },
+                            { label: 'Approve', value: 'approve' },
+                            { label: 'Reject', value: 'reject' },
+                        ]}
+                    />
+                </Group> <br />
 
                 <div style={{ textAlign: "center" }}>
-                    <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
+                    <Button style={{ backgroundColor: (submittable) ? "#001641" : "", color: "#ffffff", borderRadius: 5 }}
                         position="center"
                         size="md"
                         loading={loading}
+                        disabled={!submittable}
                         onClick={() => submitForm()}>
                         Submit
                     </Button>

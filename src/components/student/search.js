@@ -151,7 +151,7 @@ export default function Search() {
                     <p className="results">
                         Results &nbsp;
                         <b>
-                            {(currentPage - 1) * 10 + 1} -&nbsp;
+                            {(filteredMaterials.length === 0) ? "0" : (currentPage - 1) * 10 + 1} -&nbsp;
                             {(filteredMaterials.length < currentPage * 10) ?
                                 filteredMaterials.length : currentPage * 10}
                         </b>
@@ -224,9 +224,18 @@ export default function Search() {
                                             ((i <= (currentPage * 10 - 1)) && (i >= ((currentPage - 1) * 10))))
                                             return <SearchItem data={item} key={i} />
                                     }) :
-                                    <>
-                                        No result
-                                    </>
+                                    <div style={{ padding: 30 }}>
+                                        <h2 style={{ fontSize: 40 }}>Your search did not match any articles.</h2> <br />
+                                        <p>Suggestions: <br />
+                                            The search string needs to contain some keywords that are not stopwords. <br />
+                                            Make sure all terms are spelled correctly. <br />
+                                            Try different terms.<br />
+                                            Try more general terms.<br />
+                                            Try fewer terms.<br />
+                                            Placing "NOT" at the beginning of a search query is not supported unless you are searching within previous search results.
+                                        </p>
+
+                                    </div>
                                 }
                             </div>
                             <div >

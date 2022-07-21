@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Datetime from 'react-datetime';
 import { Chips, Chip, createStyles, Button, Modal, Group } from '@mantine/core';
 
@@ -22,13 +22,13 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   },
 }));
 
-
 export default function UploadComponent() {
   const { classes } = useStyles();
 
   const [showPopup, setShowPopup] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(true);
+  const [submittable, setSubmittable] = useState(false);
 
   //Form values
   const [topic, setTopic] = useState("")
@@ -80,6 +80,7 @@ export default function UploadComponent() {
     setAbstract("")
   }
 
+  
 
   return (
     <>

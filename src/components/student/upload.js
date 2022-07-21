@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Datetime from 'react-datetime';
 import { Chips, Chip, createStyles, Button, Modal, Group } from '@mantine/core';
 
@@ -27,6 +27,7 @@ export default function UploadComponent() {
   const { classes } = useStyles();
 
   const [showPopup, setShowPopup] = useState(false);
+  const [submittable, setSubmittable] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(true);
 
@@ -37,8 +38,9 @@ export default function UploadComponent() {
   const [publishYear, setPublishYear] = useState(new Date())
   const [publisher, setPublisher] = useState("")
   const [subjects, setSubjects] = useState([])
-  const [types, setTypes] = useState([])
+  const [types, setTypes] = useState("")
   const [url, setUrl] = useState("")
+  const [abstract, setAbstract] = useState("")
 
   const submitForm = async () => {
     setLoading(true)
@@ -54,7 +56,8 @@ export default function UploadComponent() {
       type: types.toString(),
       url: url,
       views: 0,
-      status: "pending"
+      status: "pending",
+      materialAbstract: abstract
     }
 
     let result = await saveMaterial(data)
@@ -77,7 +80,21 @@ export default function UploadComponent() {
     setSubjects([])
     setTypes([])
     setUrl("")
+    setAbstract("")
   }
+
+  useEffect(() => {
+    //Check if all required fields are entered by user.
+    if (email !== "" &&
+      topic !== "" &&
+      subjects.length !== 0 &&
+      types !== "" &&
+      url !== "" &&
+      abstract !== "") {
+        setSubmittable(true)
+    }
+
+  })
 
   return (
     <>
@@ -101,13 +118,16 @@ export default function UploadComponent() {
         />
 
         <label htmlFor="datepicker">Publish year: <span style={{ color: "#ED0A00" }}>*</span></label>
-        <Datetime
-          initialViewMode="years"
-          dateFormat="YYYY" timeFormat={false}
-          value={publishYear}
-          input={false}
-          onChange={(e) => setPublishYear(e)}
-        />
+
+        <div style={{ width: "50%" }}>
+          <Datetime
+            initialViewMode="years"
+            dateFormat="YYYY" timeFormat={false}
+            value={publishYear}
+            input={false}
+            onChange={(e) => setPublishYear(e)}
+          />
+        </div><br />
 
         <label htmlFor="publisher">Publisher:</label>
         <input type="text" id="publisher"
@@ -143,6 +163,15 @@ export default function UploadComponent() {
           onChange={(e) => setUrl(e.target.value)}
         />
 
+
+        <label htmlFor="abstract">
+          Abstract: <span style={{ color: "#ED0A00" }}>*</span><br />
+        </label>
+        <textarea id="abstract" rows="4"
+          value={abstract}
+          onChange={(e) => setAbstract(e.target.value)}
+        />
+
         <p style={{ color: "#ED0A00" }}>
           Reminder: <br />
           Please input one link per upload only. <br />
@@ -159,10 +188,11 @@ export default function UploadComponent() {
               Reset
             </Button>
 
-            <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
+            <Button style={{ backgroundColor: (submittable) ? "#001641" : "", color: "#ffffff", borderRadius: 5 }}
               position="center"
               size="md"
               loading={loading}
+              disabled={!submittable}
               onClick={() => submitForm()}>
               Submit
             </Button>
