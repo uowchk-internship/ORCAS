@@ -46,6 +46,7 @@ export default function MaterialDetailEdit(props) {
     const [subjects, setSubjects] = useState((detailViewItem.subject !== undefined) ? detailViewItem.subject.split(",") : [])
     const [types, setTypes] = useState((detailViewItem.type !== undefined) ? detailViewItem.type.split(",") : [])
     const [url, setUrl] = useState((detailViewItem.url !== undefined) ? detailViewItem.url : "")
+    const [abstract, setAbstract] = useState((detailViewItem.materialAbstract !== undefined) ? detailViewItem.materialAbstract : "")
 
     const submitForm = async () => {
         setLoading(true)
@@ -61,7 +62,8 @@ export default function MaterialDetailEdit(props) {
             type: types.toString(),
             url: url,
             views: detailViewItem.views,
-            status: detailViewItem.status
+            status: detailViewItem.status,
+            materialAbstract: abstract
         }
 
         let result = await saveMaterial(data)
@@ -140,6 +142,15 @@ export default function MaterialDetailEdit(props) {
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                 />
+
+                <label htmlFor="abstract">
+                    Abstract: <span style={{ color: "#ED0A00" }}>*</span><br />
+                </label>
+                <textarea id="abstract" rows="4"
+                    value={abstract}
+                    onChange={(e) => setAbstract(e.target.value)}
+                />
+
 
                 <p style={{ color: "#ED0A00" }}>
                     Reminder: <br />

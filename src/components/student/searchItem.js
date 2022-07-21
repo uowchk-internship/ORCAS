@@ -1,9 +1,11 @@
-import { Button } from '@mantine/core';
+import { useState } from 'react'
+import { Button, Modal, Group } from '@mantine/core';
 
 import { addViewCount } from '../../functions/materials'
 
 export default function SearchItem(props) {
     let data = props.data
+    const [showAbstract, setShowAbstract] = useState(false)
 
     return (
         <>
@@ -15,24 +17,45 @@ export default function SearchItem(props) {
                     </tr>
                     <tr>
                         <td>
-                            <b>{data.type}</b> | Year of Publish: <b>{data.publishYear}</b> | Views: <b>{data.views}</b><br/>
+                            <b>{data.type}</b> | Year of Publish: <b>{data.publishYear}</b> | Views: <b>{data.views}</b><br />
                             <b>{data.subject}</b>
                         </td>
                         <td>
-                            <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
-                                position="center"
-                                size="md"
-                                onClick={() => {
-                                    window.open(data.url, '_blank').focus();
-                                    addViewCount(data)
-                                }}>
-                                Open in new tab
-                            </Button>
+                            <Group>
+                                <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
+                                    position="center"
+                                    size="md"
+                                    onClick={() => setShowAbstract(true)}>
+                                    Abstract
+                                </Button>
 
+                                <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
+                                    position="center"
+                                    size="md"
+                                    onClick={() => {
+                                        window.open(data.url, '_blank').focus();
+                                        addViewCount(data)
+                                    }}>
+                                    Open in new tab
+                                </Button>
+
+                            </Group>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <Modal
+                withCloseButton={false}
+                size="xl"
+                opened={showAbstract}
+                onClose={() => setShowAbstract(false)}
+            >
+                <h2 style={{ fontSize: 40 }}><b>Abstract</b></h2>
+                <hr />
+                {data.materialAbstract}
+            </Modal>
+
         </>
     )
 }
