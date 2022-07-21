@@ -126,8 +126,8 @@ export default function UploadComponent() {
         </Chips>
         <br />
 
-        <label >Resources Type: (you can choose more than one) <span style={{ color: "#ED0A00" }}>*</span></label>
-        <Chips value={types} onChange={setTypes} multiple size="md" radius="sm" classNames={classes}>
+        <label >Resources Type: (choose one) <span style={{ color: "#ED0A00" }}>*</span></label>
+        <Chips value={types} onChange={setTypes} size="md" radius="sm" classNames={classes}>
           <Chip value="Journal Article">Journal Article</Chip>
           <Chip value="Newspaper Article">Newspaper Article</Chip>
           <Chip value="Video">Video</Chip>

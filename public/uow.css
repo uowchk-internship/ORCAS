@@ -25752,6 +25752,7 @@ screen and (min-width:40em) {
 }
 
 .close-nav {
+    background-color: #efefef !important;
     display: none;
     position: absolute;
     top: 15px;
