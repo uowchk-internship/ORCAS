@@ -226,7 +226,8 @@ const Header = () => {
 
                                                         <a href="/study-at-uowchk/" className="subnav-cta" tabIndex="0">Study at UOWCHK </a>
 
-                                                        <button className="close-nav" tabIndex="0">Close</button>
+                                                        <button className="close-nav" onClick={() => setChosenTab(0)}
+                                                            tabIndex="0">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -318,7 +319,8 @@ const Header = () => {
                                                         >About us
                                                         </a>
 
-                                                        <button className="close-nav" tabIndex="-1">Close</button>
+                                                        <button className="close-nav" onClick={() => setChosenTab(0)}
+                                                            tabIndex="-1">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -415,7 +417,7 @@ const Header = () => {
                                                             </li>
                                                         </ul>
 
-                                                        <button className="close-nav" tabIndex="-1">Close</button>
+                                                        <button className="close-nav" onClick={() => setChosenTab(0)} tabIndex="-1">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -490,7 +492,8 @@ const Header = () => {
                                                         >學院課程
                                                         </a>
 
-                                                        <button className="close-nav" tabIndex="-1">Close</button>
+                                                        <button className="close-nav" onClick={() => setChosenTab(0)}
+                                                            tabIndex="-1">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -576,7 +579,8 @@ const Header = () => {
                                                         >關於我們
                                                         </a>
 
-                                                        <button className="close-nav" tabIndex="-1">Close</button>
+                                                        <button className="close-nav" onClick={() => setChosenTab(0)}
+                                                            tabIndex="-1">Close</button>
                                                     </div>
                                                 </div>
                                             </li>
