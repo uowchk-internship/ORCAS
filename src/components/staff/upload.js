@@ -80,11 +80,29 @@ export default function UploadComponent() {
     setAbstract("")
   }
 
-  
+
 
   return (
     <>
+
+      <Group>
+      <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
+        position="center"
+        size="md"
+        loading={loading}>
+        Download CSV Template
+      </Button>
+      <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
+        position="center"
+        size="md"
+        loading={loading}>
+        Batch Upload With CSV File
+      </Button>
+
+      </Group>
+
       <form>
+        <br />
         <label htmlFor="topic">Topic: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="topic"
           value={topic}
