@@ -34,7 +34,7 @@ export default function SearchItem(props) {
                                     size="md"
                                     onClick={() => {
                                         window.open(data.url, '_blank').focus();
-                                        addViewCount(data)
+                                        addViewCount(data.id)
                                     }}>
                                     Open in new tab
                                 </Button>
