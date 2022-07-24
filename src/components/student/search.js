@@ -24,6 +24,8 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 export default function Search() {
     const { classes } = useStyles();
 
+    const [submitted, setSubmitted] = useState(true);
+
     const [fetched, setFetched] = useState(false)
     const [materials, setMaterials] = useState([])
     const [filteredMaterials, setFilteredMaterials] = useState([])
@@ -34,13 +36,13 @@ export default function Search() {
     const [oldKeyword, setOldKeyword] = useState("")
 
     //filters
-    const [chosenTab, setChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
+    const [chosenTab, setChosenTab] = useState(["Journal Article", "Newspaper Article", "Video"])
     const [yearFilter, setYearFilter] = useState("0")
     const [subjectFilter, setSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
     const [sortNew, setSortNew] = useState(false)
 
     //for monitoring changes in filter
-    const [oldChosenTab, setOldChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
+    const [oldChosenTab, setOldChosenTab] = useState(["Journal Article", "Newspaper Article", "Video"])
     const [oldYearFilter, setOldYearFilter] = useState("0")
     const [oldSubjectFilter, setOldSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
     const [oldSortNew, setOldSortNew] = useState(false)
@@ -92,10 +94,10 @@ export default function Search() {
         return result;
     }
 
-    const filterAndSort = () => {
+    const filterAndSort = async (materials_) => {
         //filter and sort the array
         let filtered = []
-        for (const item of materials) {
+        for (const item of materials_) {
             if (checkFilterMatch(item)) {
                 filtered.push(item)
             }
@@ -113,20 +115,21 @@ export default function Search() {
     }
 
     const fetchMaterials = async (keyword_) => {
+        console.log("fetching")
         let result = await getWithKeywordsAndStatus("approve", keyword_)
         setMaterials(result)
-        setFetched(true)
+        await filterAndSort(result)
+        setSubmitted(false)
     }
 
     useEffect(() => {
 
-        if (!fetched) {
+        if (submitted) {
             fetchMaterials("")
-            filterAndSort()
         }
 
         if (checkFilterChanged()) {
-            filterAndSort()
+            filterAndSort(materials)
         }
 
     })
@@ -135,11 +138,11 @@ export default function Search() {
         <>
             <section id="search-bar" >
                 <div id="search-container">
-                    <input value={keyword} onChange={(e) => {
+                    <input value={keyword} onChange={ async (e) => {
                         setKeyword(e.target.value);
-                        fetchMaterials(e.target.value);
-                        filterAndSort()
+                        await fetchMaterials(e.target.value);
                     }}
+                        onKeyPress={(e) => { if (event.key === 'Enter') { setSubmitted(true) } }}
                         type="text" placeholder="Please input the keywords" name="search" />
                     <a onClick={() => setFetched(false)}>
                         <Image src="/images/search.png" height={39} width={39} />
@@ -168,8 +171,8 @@ export default function Search() {
 
             <div style={{ padding: 10 }}>
                 <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
-                    <Chip value="Journals Article">Journals Articles ({filteredMaterials.filter(item => (item.type === "Journals Article")).length})</Chip>
-                    <Chip value="Newspapers Article">Newspapers Articles ({filteredMaterials.filter(item => (item.type === "Newspapers Article")).length})</Chip>
+                    <Chip value="Journal Article">Journal Articles ({filteredMaterials.filter(item => (item.type === "Journal Article")).length})</Chip>
+                    <Chip value="Newspaper Article">Newspaper Articles ({filteredMaterials.filter(item => (item.type === "Newspaper Article")).length})</Chip>
                     <Chip value="Video">Video ({filteredMaterials.filter(item => (item.type === "Video")).length})</Chip>
                 </Chips>
             </div>

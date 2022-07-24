@@ -25,7 +25,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 export default function Management() {
   const { classes } = useStyles();
 
-  const [status, setStatus] = useState("all")
   const [showDetailView, setShowDetailView] = useState(false)
   const [detailViewItem, setDetailViewItem] = useState({})
 
@@ -33,13 +32,15 @@ export default function Management() {
   const [oldKeyword, setOldKeyword] = useState("")
 
   //filters
-  const [chosenTab, setChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
+  const [chosenTab, setChosenTab] = useState(["Journal Article", "Newspaper Article", "Video"])
   const [subjectFilter, setSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
+  const [status, setStatus] = useState("all")
   const [sortNew, setSortNew] = useState(false)
 
   //for monitoring changes in filter
-  const [oldChosenTab, setOldChosenTab] = useState(["Journals Article", "Newspapers Article", "Video"])
+  const [oldChosenTab, setOldChosenTab] = useState(["Journal Article", "Newspaper Article", "Video"])
   const [oldSubjectFilter, setOldSubjectFilter] = useState(["Science & Technology", "Arts & Humanities", "Social Science", "Business", "Others"])
+  const [oldStatus, setOldStatus] = useState("all")
   const [oldSortNew, setOldSortNew] = useState(false)
 
 
@@ -58,6 +59,8 @@ export default function Management() {
       setOldSubjectFilter(subjectFilter)
     } else if (sortNew !== oldSortNew) {
       setOldSortNew(sortNew)
+    } else if (oldStatus !== status) {
+      setOldStatus(status)
     } else {
       result = false
     }
@@ -82,14 +85,20 @@ export default function Management() {
           result = true;
     }
 
+    if (result && (status === "all" || item.status === status)) {
+      result = true
+    } else {
+      result = false
+    }
+
     return result;
   }
 
-  const filterAndSort = () => {
+  const filterAndSort = (materials_, keyword_) => {
     //filter and sort the array
     let filtered = []
-    for (const item of materials) {
-      if ((keyword === "" || item.topic.toLowerCase().includes(keyword.toLocaleLowerCase())) && checkFilterMatch(item)) {
+    for (const item of materials_) {
+      if ((keyword_ === "" || item.topic.toLowerCase().includes(keyword_.toLocaleLowerCase())) && checkFilterMatch(item)) {
         filtered.push(item)
       }
     }
@@ -108,6 +117,7 @@ export default function Management() {
   const fetchMaterials = async (keyword_) => {
     let result = await getAllMaterials()
     setMaterials(result)
+    filterAndSort(result, keyword_)
     setFetched(true)
   }
 
@@ -115,11 +125,11 @@ export default function Management() {
 
     if (!fetched) {
       fetchMaterials("")
-      filterAndSort()
     }
 
+    console.log("checkFilterChanged(): " + checkFilterChanged())
     if (checkFilterChanged()) {
-      filterAndSort()
+      filterAndSort(materials, keyword)
     }
 
   })
@@ -134,7 +144,6 @@ export default function Management() {
           <input value={keyword} onChange={(e) => {
             setKeyword(e.target.value);
             fetchMaterials(e.target.value);
-            filterAndSort()
           }}
             type="text" placeholder="Please input the keywords" name="search" />
           <a onClick={() => setFetched(false)}>
@@ -161,8 +170,8 @@ export default function Management() {
           <b>Type:</b>
           <div >
             <Chips value={chosenTab} onChange={setChosenTab} multiple size="md" radius="sm" classNames={classes}>
-              <Chip value="Journals Article">Journals Articles</Chip>
-              <Chip value="Newspapers Article">Newspapers Articles</Chip>
+              <Chip value="Journal Article">Journal Articles</Chip>
+              <Chip value="Newspaper Article">Newspaper Articles</Chip>
               <Chip value="Video">Video</Chip>
             </Chips>
           </div>
