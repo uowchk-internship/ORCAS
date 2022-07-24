@@ -91,7 +91,9 @@ export default function UploadComponent() {
       types !== "" &&
       url !== "" &&
       abstract !== "") {
-        setSubmittable(true)
+      setSubmittable(true)
+    }else{
+      setSubmittable(false)
     }
 
   })

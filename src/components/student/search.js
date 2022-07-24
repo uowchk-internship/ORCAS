@@ -225,7 +225,7 @@ export default function Search() {
                                     [...filteredMaterials].map((item, i) => {
                                         if (checkFilterMatch(item) &&
                                             ((i <= (currentPage * 10 - 1)) && (i >= ((currentPage - 1) * 10))))
-                                            return <SearchItem data={item} key={i} />
+                                            return <SearchItem preview={false} data={item} key={i} />
                                     }) :
                                     <div style={{ padding: 30 }}>
                                         <h2 style={{ fontSize: 40 }}>Your search did not match any articles.</h2> <br />

@@ -1,4 +1,5 @@
 const axios = require('axios');
+import * as XLSX from 'xlsx';
 
 import { saveJWT, getJWT } from './cookies';
 
@@ -95,4 +96,36 @@ export const checkLoginStatus = async () => {
 
     return result
 
+}
+
+export const csvHandler = async (file) => {
+    const data = await file.arrayBuffer();
+    const workbook = XLSX.read(data).Sheets["Sheet1"];
+    console.log(workbook);
+
+    let fileJson = XLSX.utils.sheet_to_json(workbook);
+    console.log(fileJson);
+
+    let jsonObjects = []
+    for (let item of fileJson) {
+
+        let data = {
+            id: 0,
+            email: "admin",
+            topic: item.topic,
+            author: item.author,
+            publishYear: item.publishYear,
+            publisher: item.publisher,
+            subject: item.subject,
+            type: item.type,
+            url: item.url,
+            views: 0,
+            status: "approve",
+            materialAbstract: item.abstract
+        }
+
+        jsonObjects.push(data)
+    }
+
+    return jsonObjects
 }
