@@ -65,9 +65,9 @@
     position: relative;
 }
 
-button:focus, button:hover {
+/* button:focus, button:hover {
     background: #0033FF;
-}
+} */
 
 .arrow {
     visibility: hidden;

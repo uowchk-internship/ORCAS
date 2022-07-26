@@ -565,3 +565,7 @@ p.description {
 .noBorder tbody td{
   border: 0px solid #f1f1f1 !important;
 }
+
+.popupButton{
+  background: #FFFFFF;
+}
