@@ -6,7 +6,7 @@ import { Chips, Chip, createStyles, Button, Modal, SegmentedControl, Group } fro
 import UploadResultFail from '../student/uploadResultFail';
 import UploadResultSuccess from '../student/uploadResultSuccess';
 
-import { saveMaterial } from '../../functions/materials'
+import { saveMaterial } from '../../functions/admin'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
     iconWrapper: {
@@ -37,7 +37,7 @@ export default function MaterialDetailEdit(props) {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(true);
 
-    console.log("detailViewItem.type: "+detailViewItem.type)
+    console.log("detailViewItem.type: " + detailViewItem.type)
 
     //Form values
     const [email, setEmail] = useState((detailViewItem.email !== undefined) ? detailViewItem.email : "")
@@ -172,7 +172,7 @@ export default function MaterialDetailEdit(props) {
                     Please input one link per upload only. <br />
                     Please double check link is valid before submission.<br />
                 </p>
-                
+
                 <Group position="center">
                     <SegmentedControl
                         fullWidth

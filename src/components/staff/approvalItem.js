@@ -2,7 +2,8 @@ import { Button } from '@mantine/core';
 import { useState } from 'react'
 import moment from 'moment';
 
-import { saveMaterial } from '../../functions/materials'
+import { saveMaterial } from '../../functions/admin'
+
 
 export default function ApprovalItem(props) {
     moment().format();
@@ -13,6 +14,8 @@ export default function ApprovalItem(props) {
     const [updateView, setUpdateView] = useState(false)
 
     const saveStatus = async (option) => {
+        console.log("data")
+        console.log(data)
         data.status = option
         data.rankingMonth = (option ==="approve") ? moment(new Date()).format("MM-YYYY"):""
         data.publishDate = new Date()

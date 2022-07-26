@@ -61,6 +61,7 @@ export const saveMaterial = async (data) => {
     await axios.post(url, data)
         .then((response) => {
             if (response.status == 200) {
+                console.log(response.data)
                 result = "done"
             } else {
                 result = "fail"

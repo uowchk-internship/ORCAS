@@ -27,6 +27,7 @@ export default function Management() {
 
   const [showDetailView, setShowDetailView] = useState(false)
   const [detailViewItem, setDetailViewItem] = useState({})
+  const [needRefresh, setNeedRefresh] = useState(false)
 
   const [keyword, setKeyword] = useState("")
   const [oldKeyword, setOldKeyword] = useState("")
@@ -125,6 +126,12 @@ export default function Management() {
 
     if (!fetched) {
       fetchMaterials("")
+    }
+
+    if (needRefresh) {
+      console.log("Refreshing")
+      fetchMaterials(keyword)
+      setNeedRefresh(false)
     }
 
     console.log("checkFilterChanged(): " + checkFilterChanged())
@@ -231,7 +238,8 @@ export default function Management() {
               if ((i <= (currentPage * 10 - 1)) && (i >= ((currentPage - 1) * 10)))
                 return <ManagementItem data={item} key={i}
                   setShowDetailView={setShowDetailView}
-                  setDetailViewItem={setDetailViewItem} />
+                  setDetailViewItem={setDetailViewItem}
+                  setNeedRefresh={setNeedRefresh} />
 
               // <SearchItem data={item} key={i} />
             }) :
