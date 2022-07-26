@@ -47,7 +47,7 @@ export default function UploadComponent() {
   const [publisher, setPublisher] = useState("")
   const [subjects, setSubjects] = useState([])
   const [types, setTypes] = useState("")
-  const [url, setUrl] = useState("")
+  const [url, setUrl] = useState("https://")
   const [abstract, setAbstract] = useState("")
 
   const submitForm = async () => {

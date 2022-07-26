@@ -12,7 +12,7 @@ export default function Homepage() {
                     <a><Link href="/staff/approval">
                         <h2 className="checklink" >
                             Students Approval &nbsp;
-                            <span class="icon--chevron-right" style={{ fontSize: 35 }}></span>
+                            <span className="icon--chevron-right" style={{ fontSize: 35 }}></span>
                         </h2>
                     </Link></a>
                     <p className="description">Review the learning resources submitted by students</p>
@@ -20,7 +20,7 @@ export default function Homepage() {
                     <a><Link href="/staff/management">
                         <h2 className="checklink">
                             Management &nbsp;
-                            <span class="icon--chevron-right" style={{ fontSize: 35 }}></span>
+                            <span className="icon--chevron-right" style={{ fontSize: 35 }}></span>
                         </h2>
                     </Link></a>
 
@@ -30,7 +30,7 @@ export default function Homepage() {
                     <a><Link href="/staff/upload">
                         <h2 className="checklink" >
                             Upload &nbsp;
-                            <span class="icon--chevron-right" style={{ fontSize: 35 }}></span>
+                            <span className="icon--chevron-right" style={{ fontSize: 35 }}></span>
                         </h2>
                     </Link></a>
                     <p className="description">Upload learning resources</p>
