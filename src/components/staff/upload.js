@@ -4,7 +4,9 @@ import { Chips, Chip, createStyles, Button, Modal, Group } from '@mantine/core';
 
 import UploadResultFail from '../student/uploadResultFail';
 import UploadResultSuccess from '../student/uploadResultSuccess';
+import BatchUploadPreview from './uploadBatchPreview'
 
+import { csvHandler } from '../../functions/admin'
 import { saveMaterial } from '../../functions/materials'
 
 const useStyles = createStyles((theme, _params, getRef) => ({
@@ -26,9 +28,15 @@ export default function UploadComponent() {
   const { classes } = useStyles();
 
   const [showPopup, setShowPopup] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [showRemark, setShowRemark] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const [previewData, setPreviewData] = useState([])
+
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [batchUploadLoading, setBatchUploadLoading] = useState(false);
   const [success, setSuccess] = useState(true);
   const [submittable, setSubmittable] = useState(false);
+  const [csvError, setCSVError] = useState(false);
 
   //Form values
   const [topic, setTopic] = useState("")
@@ -41,7 +49,7 @@ export default function UploadComponent() {
   const [abstract, setAbstract] = useState("")
 
   const submitForm = async () => {
-    setLoading(true)
+    setSubmitLoading(true)
 
     let data = {
       id: 0,
@@ -65,7 +73,7 @@ export default function UploadComponent() {
       setSuccess(false)
     }
     setShowPopup(true)
-    setLoading(false)
+    setSubmitLoading(false)
 
   }
 
@@ -80,24 +88,82 @@ export default function UploadComponent() {
     setAbstract("")
   }
 
+  const batchUploadHandler = async (e) => {
+    setBatchUploadLoading(true)
+
+    //start reading the file
+    const file = e.target.files[0];
+    let result = await csvHandler(file)
+
+    if (result.length === 0) {
+      setCSVError(true)
+    } else {
+      setShowPreview(true)
+      setPreviewData(result)
+    }
+
+    document.getElementById('programPlanUpload').type = "text"
+    document.getElementById('programPlanUpload').type = "file"
+    setBatchUploadLoading(false)
+  }
+
+  useEffect(() => {
+    //Check if all required fields are entered by user.
+    if (topic !== "" &&
+      subjects.length !== 0 &&
+      types !== "" &&
+      url !== "" &&
+      abstract !== "") {
+      setSubmittable(true)
+    }else{
+      setSubmittable(false)
+    }
+
+  })
+
+  
+
 
 
   return (
     <>
 
+      <div>
+        <label htmlFor="programPlanUpload">
+          <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
+            onClick={() => document.getElementById('programPlanUpload').click()}
+            position="center" size="md"
+            loading={batchUploadLoading}>
+            Batch Upload With CSV File
+          </Button>
+        </label>
+        <input hidden type="file" id="programPlanUpload" accept=".csv" onChange={batchUploadHandler} />
+
+        <p style={{ color: "#ED0A00" }} hidden={!csvError}>
+          Error when reading the CSV file.
+        </p>
+      </div>
+      <br />
+
+
+
       <Group>
-      <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
-        position="center"
-        size="md"
-        loading={loading}>
-        Download CSV Template
-      </Button>
-      <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
-        position="center"
-        size="md"
-        loading={loading}>
-        Batch Upload With CSV File
-      </Button>
+        <a href="/CSV_Sample.csv" download>
+          <Button style={{ backgroundColor: "#0033FF", color: "#ffffff", borderRadius: 5 }}
+            position="center"
+            size="md">
+            Download CSV Template
+          </Button>
+        </a>
+
+        <Button style={{ backgroundColor: "#0033FF", color: "#ffffff", borderRadius: 5 }}
+          position="center"
+          onClick={() => setShowRemark(true)}
+          size="md">
+          Remarks for uploading CSV file
+        </Button>
+
+
 
       </Group>
 
@@ -188,10 +254,11 @@ export default function UploadComponent() {
               Reset
             </Button>
 
-            <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
+            <Button style={{ backgroundColor: (submittable) ? "#001641" : "", color: "#ffffff", borderRadius: 5 }}
               position="center"
               size="md"
-              loading={loading}
+              loading={submitLoading}
+              disabled={!submittable}
               onClick={() => submitForm()}>
               Submit
             </Button>
@@ -201,6 +268,8 @@ export default function UploadComponent() {
         <br /><br />
       </form>
 
+
+      {/* Modals */}
       <Modal
         withCloseButton={false}
         size="xl"
@@ -212,6 +281,50 @@ export default function UploadComponent() {
           <UploadResultFail setShowPopup={setShowPopup} />
         }
       </Modal>
+
+      <Modal
+        withCloseButton={false}
+        size="80%"
+        opened={showRemark}
+        onClose={() => setShowRemark(false)}
+      >
+        <img src="/images/csvSample.png" /> <br /><br />
+        <h2 style={{ fontSize: 30 }}>Available values for subjects:</h2>
+        <ul>
+          <li>Science & Technology</li>
+          <li>Arts & Humanities</li>
+          <li>Social Science</li>
+          <li>Business</li>
+          <li>Others</li>
+        </ul>
+
+        <p>
+          For multiple subjects, please seperate the values with a <b>comma(,)</b> <br />
+          Eg: <b>"Science & Technology, Arts & Humanities, Social Science"</b>
+        </p>
+
+        <h2 style={{ fontSize: 30 }}>Available values for resources type:</h2>
+        <ul>
+          <li>Journal Article</li>
+          <li>Newspaper Article</li>
+          <li>Video</li>
+        </ul>
+      </Modal>
+
+      <Modal
+        withCloseButton={false}
+        size="xl"
+        opened={showPreview}
+        onClose={() => setShowPreview(false)}
+      >
+        <BatchUploadPreview
+          data={previewData}
+          setShowPreview={setShowPreview}
+          setSuccess={setSuccess}
+          setShowPopup={setShowPopup}
+        />
+      </Modal>
+
     </>
   );
 }

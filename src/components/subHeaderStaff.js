@@ -1,9 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Router from 'next/router'
+
 import Link from 'next/link'
+
+import { checkLoginStatus, logout } from '../functions/admin'
 
 export default function SubHeader(props) {
   let location = props.path !== undefined ? props.path : "";
 
+  const [loginChecked, setLoginChecked] = useState(false)
+
+  const logoutHandler = () => {
+    logout();
+    setLoginChecked(false)
+  }
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      let isLogin = await checkLoginStatus()
+      console.log(isLogin)
+
+      if (isLogin) {
+        setLoginChecked(true)
+      } else {
+        Router.push("/login")
+      }
+    }
+
+    if (!loginChecked) {
+      checkLogin();
+    }
+  })
 
   return (
     <section className="uw-masthead uw-masthead--page-nav uw-masthead--image">
@@ -147,7 +174,7 @@ export default function SubHeader(props) {
                 </li>
                 <li>
                   <span >
-                    <Link href="/">Logout</Link>
+                    <a onClick={() => logoutHandler()}>Logout</a>
                   </span>
                 </li>
               </ul>
@@ -167,6 +194,6 @@ export default function SubHeader(props) {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }

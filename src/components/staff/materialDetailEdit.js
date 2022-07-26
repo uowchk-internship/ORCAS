@@ -37,6 +37,8 @@ export default function MaterialDetailEdit(props) {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(true);
 
+    console.log("detailViewItem.type: "+detailViewItem.type)
+
     //Form values
     const [email, setEmail] = useState((detailViewItem.email !== undefined) ? detailViewItem.email : "")
     const [topic, setTopic] = useState((detailViewItem.topic !== undefined) ? detailViewItem.topic : "")

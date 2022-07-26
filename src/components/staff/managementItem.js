@@ -42,7 +42,7 @@ export default function ApprovalItem(props) {
                     </td>
                     <td>
                         <div style={{ textAlign: "center" }}>
-                            <Button style={{ backgroundColor: "#ED0A00", color: "#ffffff", borderRadius: 5 }}
+                            <Button style={{ backgroundColor: "#7A838B", color: "#ffffff", borderRadius: 5 }}
                                 position="center" compact size="md" color="red"
                                 onClick={() => setShowModal(true)}>
                                 Remove

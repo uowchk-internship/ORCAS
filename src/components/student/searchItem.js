@@ -5,7 +5,10 @@ import { addViewCount } from '../../functions/materials'
 
 export default function SearchItem(props) {
     let data = props.data
+    let preview = props.preview
+
     const [showAbstract, setShowAbstract] = useState(false)
+    console.log(data)
 
     return (
         <>
@@ -34,7 +37,9 @@ export default function SearchItem(props) {
                                     size="md"
                                     onClick={() => {
                                         window.open(data.url, '_blank').focus();
-                                        addViewCount(data)
+                                        if (!preview) {
+                                            addViewCount(data.id)
+                                        }
                                     }}>
                                     Open in new tab
                                 </Button>

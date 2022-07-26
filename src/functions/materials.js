@@ -46,10 +46,9 @@ export const getAllMaterials = async () => {
 
 
 
-export const addViewCount = async (data) => {
-    data.views++;
-    let url = `https://tomcat.johnnyip.com/orcas/api/material/`
-    await axios.post(url, data)
+export const addViewCount = async (id) => {
+    let url = `https://tomcat.johnnyip.com/orcas/api/material/addCount/${id}`
+    await axios.post(url)
         .then((response) => { })
         .catch((err) => {
             console.log(err);
@@ -58,7 +57,7 @@ export const addViewCount = async (data) => {
 
 export const saveMaterial = async (data) => {
     let result = ""
-    let url = `https://tomcat.johnnyip.com/orcas/api/material/`
+    let url = `https://tomcat.johnnyip.com/orcas/api/material/new`
     await axios.post(url, data)
         .then((response) => {
             if (response.status == 200) {
@@ -71,27 +70,6 @@ export const saveMaterial = async (data) => {
             console.log(err);
             result = "fail"
         })
-
     return result
-
 }
 
-export const removeMaterial = async (id) => {
-    let result = ""
-    let url = `https://tomcat.johnnyip.com/orcas/api/material/delete/${id}`
-    await axios.get(url)
-        .then((response) => {
-            if (response.status == 200) {
-                result = "done"
-            } else {
-                result = "fail"
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-            result = "fail"
-        })
-
-    return result
-
-}

@@ -19,9 +19,9 @@ export default function Censorship() {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPage, setTotalPage] = useState(1)
 
-  const filterMaterials = () => {
+  const filterMaterials = (materials_) => {
     let tempFiltered = []
-    for (const item of materials) {
+    for (const item of materials_) {
       if (filter === "all" || item.status === filter) {
         tempFiltered.push(item)
       }
@@ -38,16 +38,16 @@ export default function Censorship() {
       let result = await getAllMaterials()
       setMaterials(result)
       setFetched(true)
-      filterMaterials()
+      filterMaterials(result)
 
     }
 
     if (!fetched || materials.length === 0) {
-      fetchMaterials()
+      fetchMaterials(materials)
     }
 
     if (oldFilter != filter) {
-      filterMaterials()
+      filterMaterials(materials)
       setOldFilter(filter)
     }
 
