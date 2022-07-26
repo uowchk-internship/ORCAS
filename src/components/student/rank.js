@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import { Select } from '@mantine/core';
+import { Select, Modal } from '@mantine/core';
 
-import RankItem from './rankItem'
-import { getMonths } from '../../functions/ranking'
+import RankItem from './rankItem';
+import Rankpopup from './rankPopup';
+import { getMonths } from '../../functions/ranking';
 
 export default function RankComponent() {
-  const [fetched, setFetched] = useState(false)
+  const [fetched, setFetched] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   //Ranking data
   const [allRankings, setAllRankings] = useState({})
@@ -115,11 +117,21 @@ export default function RankComponent() {
 
 
       <div className="popup">
-        Click me to check the rewards of top 3 students
+        <a onClick={() => {setShowPopup(true)}}>Click me</a> to check the rewards of top 3 students
         <span className="popuptext" id="myPopup">
           you have got the rewards! congrad!
         </span>
       </div>
+
+      <Modal
+        opened={showPopup}
+        onClose={() => setShowPopup(false)}
+        title="Rewards: "
+      >
+        
+        <Rankpopup />
+      </Modal>
+
     </>
   );
 }
