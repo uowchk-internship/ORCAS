@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Datetime from "react-datetime";
+import moment from 'moment';
 import { Chips, Chip, createStyles, Button, Modal, Group } from "@mantine/core";
 
 import UploadResultFail from "./uploadResultFail";
@@ -23,6 +24,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 }));
 
 export default function UploadComponent() {
+  moment().format();
   const { classes } = useStyles();
 
   const [showPopup, setShowPopup] = useState(false);
@@ -34,7 +36,7 @@ export default function UploadComponent() {
   const [email, setEmail] = useState("");
   const [topic, setTopic] = useState("");
   const [author, setAuthor] = useState("");
-  const [publishYear, setPublishYear] = useState(new Date());
+  const [publishYear, setPublishYear] = useState(moment());
   const [publisher, setPublisher] = useState("");
   const [subjects, setSubjects] = useState([]);
   const [types, setTypes] = useState("");
@@ -48,15 +50,14 @@ export default function UploadComponent() {
   const submitForm = async () => {
     setLoading(true);
 
+    console.log(publishYear)
+
     let data = {
       id: 0,
       email: email,
       topic: topic,
       author: author,
-      publishYear:
-        publishYear.format("YYYY") !== undefined
-          ? publishYear.format("YYYY")
-          : publishYear.getFullYear,
+      publishYear: publishYear.format("YYYY"),
       publisher: publisher,
       subject: subjects.toString(),
       type: types.toString(),

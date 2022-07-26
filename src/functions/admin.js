@@ -65,6 +65,7 @@ export const login = async (username, password) => {
             result = "fail"
         })
 
+    console.log("Posted")
     return result
 }
 

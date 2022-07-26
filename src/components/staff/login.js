@@ -32,38 +32,38 @@ export default function Login() {
     return (
         <>
             <section className="page-form grid-container" style={{ width: "50%" }}>
-                <form>
-                    <label htmlFor="loginEmail">Username:</label>
-                    <input type="text" id="loginEmail"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)} />
-                    <br />
+                {/* <form onSubmit={() => checkCredentials()} > */}
+                <label htmlFor="loginEmail">Username:</label>
+                <input type="text" id="loginEmail"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)} />
+                <br />
 
-                    <label htmlFor="loginPw">Password:</label>
-                    <input type="password" id="loginPw"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)} />
-                    <br />
+                <label htmlFor="loginPw">Password:</label>
+                <input type="password" id="loginPw"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} />
+                <br />
 
-                    {(showError) ?
-                        <p style={{ color: "#ED0A00", textAlign: "center" }}>
-                            Login failed. <br />
-                        </p>
-                        : <></>
-                    }
+                {(showError) ?
+                    <p style={{ color: "#ED0A00", textAlign: "center" }}>
+                        Login failed. <br />
+                    </p>
+                    : <></>
+                }
 
-                    <div className="d-grid gap-2 col-6 mx-auto">
-                        <div style={{ textAlign: "center" }}>
-                            <Button type="submit" style={{ backgroundColor: "#ED0A00", color: "#ffffff", borderRadius: 5 }}
-                                position="center"
-                                size="md"
-                                loading={loading}
-                                onClick={() => checkCredentials()}>
-                                <span style={{ padding: 70 }}>Submit</span>
-                            </Button>
-                        </div>
+                <div className="d-grid gap-2 col-6 mx-auto">
+                    <div style={{ textAlign: "center" }}>
+                        <Button type="submit" style={{ backgroundColor: "#ED0A00", color: "#ffffff", borderRadius: 5 }}
+                            position="center"
+                            size="md"
+                            loading={loading}
+                            onClick={() => checkCredentials()}>
+                            <span style={{ padding: 70 }}>Submit</span>
+                        </Button>
                     </div>
-                </form>
+                </div>
+                {/* </form> */}
             </section>
 
             <div style={{ padding: 50 }}></div>
