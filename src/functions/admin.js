@@ -52,7 +52,6 @@ export const login = async (username, password) => {
     await axios.post(url, body)
         .then((response) => {
             if (response.status == 200) {
-                console.log(response.data)
                 result = response.data
                 axios.defaults.headers.common['Authorization'] = result
                 saveJWT(result)
@@ -65,7 +64,6 @@ export const login = async (username, password) => {
             result = "fail"
         })
 
-    console.log("Posted")
     return result
 }
 
@@ -76,15 +74,13 @@ export const logout = () => {
 
 export const checkLoginStatus = async () => {
     let JWTFromCookie = getJWT();
-    console.log("JWT: " + JWTFromCookie)
-    axios.defaults.headers.common['Authorization'] = JWTFromCookie
+     axios.defaults.headers.common['Authorization'] = JWTFromCookie
 
     let result = false
     let url = `https://tomcat.johnnyip.com/orcas/api/admin/check`
     await axios.get(url)
         .then((response) => {
             if (response.status == 200) {
-                console.log("status: logged in")
                 result = true
             } else {
                 result = false
@@ -102,10 +98,8 @@ export const checkLoginStatus = async () => {
 export const csvHandler = async (file) => {
     const data = await file.arrayBuffer();
     const workbook = XLSX.read(data).Sheets["Sheet1"];
-    console.log(workbook);
 
     let fileJson = XLSX.utils.sheet_to_json(workbook);
-    console.log(fileJson);
 
     let jsonObjects = []
     for (let item of fileJson) {

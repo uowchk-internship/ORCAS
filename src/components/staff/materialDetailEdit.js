@@ -28,7 +28,6 @@ export default function MaterialDetailEdit(props) {
     moment().format();
 
     let detailViewItem = props.detailViewItem;
-    // console.log(detailViewItem.subject.split(","))
 
     const { classes } = useStyles();
 
@@ -37,7 +36,6 @@ export default function MaterialDetailEdit(props) {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(true);
 
-    console.log("detailViewItem.type: " + detailViewItem.type)
 
     //Form values
     const [email, setEmail] = useState((detailViewItem.email !== undefined) ? detailViewItem.email : "")

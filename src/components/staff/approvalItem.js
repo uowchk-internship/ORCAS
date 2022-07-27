@@ -14,8 +14,6 @@ export default function ApprovalItem(props) {
     const [updateView, setUpdateView] = useState(false)
 
     const saveStatus = async (option) => {
-        console.log("data")
-        console.log(data)
         data.status = option
         data.rankingMonth = (option ==="approve") ? moment(new Date()).format("MM-YYYY"):""
         data.publishDate = new Date()

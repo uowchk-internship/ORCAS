@@ -15,13 +15,10 @@ export default function Login() {
     const checkCredentials = async () => {
         setLoading(true)
 
-        console.log(username)
-        console.log(password)
         let result = await login(username, password);
         if (result === "fail") {
             setShowError(true)
         } else {
-            console.log("success")
             setShowError(false)
             Router.push("/staff/")
         }

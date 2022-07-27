@@ -50,8 +50,6 @@ export default function UploadComponent() {
   const submitForm = async () => {
     setLoading(true);
 
-    console.log(publishYear)
-
     let data = {
       id: 0,
       email: email,

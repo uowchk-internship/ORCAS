@@ -20,7 +20,6 @@ export default function RankComponent() {
   useEffect(() => {
     const fetchMonths = async () => {
       let result = await getMonths();
-      console.log(result);
 
       let completeRankings = {};
       let completeMonths = [];

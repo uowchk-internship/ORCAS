@@ -115,7 +115,6 @@ export default function Search() {
     }
 
     const fetchMaterials = async (keyword_) => {
-        console.log("fetching")
         let result = await getWithKeywordsAndStatus("approve", keyword_)
         setMaterials(result)
         await filterAndSort(result)

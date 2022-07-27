@@ -8,7 +8,6 @@ export default function SearchItem(props) {
     let preview = props.preview
 
     const [showAbstract, setShowAbstract] = useState(false)
-    console.log(data)
 
     return (
         <>

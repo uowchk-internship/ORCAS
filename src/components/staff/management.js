@@ -129,12 +129,10 @@ export default function Management() {
     }
 
     if (needRefresh) {
-      console.log("Refreshing")
       fetchMaterials(keyword)
       setNeedRefresh(false)
     }
 
-    console.log("checkFilterChanged(): " + checkFilterChanged())
     if (checkFilterChanged()) {
       filterAndSort(materials, keyword)
     }

@@ -18,7 +18,6 @@ export default function SubHeader(props) {
   useEffect(() => {
     const checkLogin = async () => {
       let isLogin = await checkLoginStatus()
-      console.log(isLogin)
 
       if (isLogin) {
         setLoginChecked(true)
