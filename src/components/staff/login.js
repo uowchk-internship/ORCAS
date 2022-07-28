@@ -33,7 +33,7 @@ export default function Login() {
                 <label htmlFor="loginEmail">Username:</label>
                 <input type="text" id="loginEmail"
                     value={username}
-                    onChange={(e) => setUsername(e.target.value)} />
+                    onChange={(e) => setUsername(e.target.value.toLowerCase())} />
                 <br />
 
                 <label htmlFor="loginPw">Password:</label>
