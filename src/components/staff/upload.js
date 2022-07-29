@@ -175,7 +175,7 @@ export default function UploadComponent() {
 
       <form>
         <br />
-        <label style={labelStyle} htmlFor="topic">Topic: <span style={{ color: "#ED0A00" }}>*</span></label>
+        <label style={labelStyle} htmlFor="topic">Title: <span style={{ color: "#ED0A00" }}>*</span></label>
         <input type="text" id="topic"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}

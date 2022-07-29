@@ -117,7 +117,7 @@ export default function UploadComponent() {
         />
 
         <label htmlFor="topic" style={labelStyle}>
-          Topic: <span style={{ color: "#ED0A00" }}>*</span>
+          Title: <span style={{ color: "#ED0A00" }}>*</span>
         </label>
         <input
           type="text"
