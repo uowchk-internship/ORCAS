@@ -11,7 +11,7 @@ export default function Homepage() {
                 <div id="select-part">
                     <a><Link href="/staff/approval">
                         <h2 className="checklink" >
-                            Students Approval &nbsp;
+                            Approval &nbsp;
                             <span className="icon--chevron-right" style={{ fontSize: 35 }}></span>
                         </h2>
                     </Link></a>
