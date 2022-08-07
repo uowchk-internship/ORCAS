@@ -1,6 +1,6 @@
-node_modules
-Dockerfile
-.git
-.gitignore
-.dockerignore
-.env
+frontend/node_modules
+frontend/Dockerfile
+frontend/.git
+frontend/.gitignore
+frontend/.dockerignore
+frontend/.env
