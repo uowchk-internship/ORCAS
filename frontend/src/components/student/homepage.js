@@ -14,13 +14,18 @@ export default function HomeComponent() {
                 <h2 className="cell js-scroll-reveal--left">ORCAS</h2>
                 <div className="cell medium-7 large-8 text standard-content-text js-scroll-reveal">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Est lorem ipsum dolor sit. Arcu non sodales neque sodales ut etiam. Eros in cursus turpis massa tincidunt. Condimentum mattis pellentesque id nibh tortor id aliquet. Eget nullam non nisi est. Ipsum faucibus vitae aliquet nec ullamcorper. Sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque. Aliquam ut porttitor leo a diam. Fermentum dui faucibus in ornare quam viverra. Pellentesque nec nam aliquam sem et tortor consequat id. Est placerat in egestas erat imperdiet. Semper feugiat nibh sed pulvinar. Senectus et netus et malesuada fames ac. Porta lorem mollis aliquam ut porttitor leo a diam. Morbi tempus iaculis urna id. Adipiscing diam donec adipiscing tristique. Ut tristique et egestas quis ipsum suspendisse. Semper feugiat nibh sed pulvinar proin gravida.
+                        Students’ power is huge and infinite; hence we would like to utilize this power and turn it into tools that can benefit more students. PALS had illustrated how students can help others in a very small scale, and the purpose of developing ORCAS is to expand the reach of each portion of power that a student contributes.
                         <br /><br />
-                        Adipiscing at in tellus integer feugiat scelerisque varius morbi enim. Tristique senectus et netus et malesuada fames ac turpis. In massa tempor nec feugiat nisl pretium. Erat velit scelerisque in dictum non consectetur a. Tempor nec feugiat nisl pretium. Adipiscing elit ut aliquam purus sit amet. Ac turpis egestas sed tempus. Venenatis a condimentum vitae sapien. Tellus cras adipiscing enim eu turpis egestas pretium. Porttitor massa id neque aliquam vestibulum morbi blandit. Montes nascetur ridiculus mus mauris vitae ultricies leo. Vulputate enim nulla aliquet porttitor.
+                        ORCAS is not just a place where students can find resources, it is a place where students can earn rewards through contribution. Students are encouraged to contribute to the resource banks and forums, and we wish that everyone can be benefitted by ORCAS.
+
                         <br /><br />
-                        Commodo odio aenean sed adipiscing. In ornare quam viverra orci sagittis eu volutpat odio facilisis. Pellentesque eu tincidunt tortor aliquam. Ut tortor pretium viverra suspendisse potenti nullam ac. Nascetur ridiculus mus mauris vitae ultricies leo. Id interdum velit laoreet id donec ultrices tincidunt arcu non. Feugiat pretium nibh ipsum consequat. In nibh mauris cursus mattis molestie a iaculis. Sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Aliquet enim tortor at auctor urna. Eu feugiat pretium nibh ipsum consequat nisl vel pretium. Blandit volutpat maecenas volutpat blandit aliquam etiam. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Tristique et egestas quis ipsum suspendisse ultrices gravida. Blandit aliquam etiam erat velit.
+                        The system is named after orcas, or killer whales in a more general sense. Orcas are highly intelligent and social animals; these animals are keen on hunting as a team and they are located at the top of the marine food chain. If orcas are human, they are the ideal type of students that we all wish to have, the name of the system is reflecting our expectation of our students. Orcas are collaborative hunters, and ORCAS is a collaborative system; orcas benefit the herd by strategically group hunts, students collaborate via ORCAS to be benefitted together.
                     </p>
                 </div>
+            </section>
+
+            <section className="page-content grid-container uw-text-block">
+                
             </section>
 
 
