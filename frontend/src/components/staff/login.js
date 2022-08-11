@@ -39,6 +39,11 @@ export default function Login() {
                 <label htmlFor="loginPw">Password:</label>
                 <input type="password" id="loginPw"
                     value={password}
+                    onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                            checkCredentials()
+                        }
+                    }}
                     onChange={(e) => setPassword(e.target.value)} />
                 <br />
 

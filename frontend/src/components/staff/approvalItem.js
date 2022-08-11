@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import { saveMaterial } from '../../functions/admin'
 
+import { sendEmail } from '../../functions/email'
 
 export default function ApprovalItem(props) {
     moment().format();
@@ -15,10 +16,20 @@ export default function ApprovalItem(props) {
 
     const saveStatus = async (option) => {
         data.status = option
-        data.rankingMonth = (option ==="approve") ? moment(new Date()).format("MM-YYYY"):""
+        data.rankingMonth = (option === "approve") ? moment(new Date()).format("MM-YYYY") : ""
         data.publishDate = new Date()
         setUpdateView(!updateView)
-        await saveMaterial(data)
+        let result = await saveMaterial(data)
+
+        if (result === "done") {
+            let emailData = {
+                recipient: "johnny@johnnyip.com",
+                subject: "Material Submission Approved",
+                msgBody: "Congratulations! Your material submission has been approved. \nUpload more materials to get rewards!"
+
+            }
+            await sendEmail(emailData);
+        }
     }
 
     return (
