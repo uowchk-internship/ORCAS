@@ -28,7 +28,7 @@ export default function SearchItem(props) {
                                     position="center"
                                     size="md"
                                     onClick={() => setShowAbstract(true)}>
-                                    Abstract
+                                    Summary
                                 </Button>
 
                                 <Button style={{ backgroundColor: "#001641", color: "#ffffff", borderRadius: 5 }}
@@ -55,7 +55,7 @@ export default function SearchItem(props) {
                 opened={showAbstract}
                 onClose={() => setShowAbstract(false)}
             >
-                <h2 style={{ fontSize: 40 }}><b>Abstract</b></h2>
+                <h2 style={{ fontSize: 40 }}><b>Summary</b></h2>
                 <hr />
                 {data.materialAbstract}
             </Modal>

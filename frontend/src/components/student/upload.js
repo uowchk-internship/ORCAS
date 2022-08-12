@@ -137,7 +137,7 @@ export default function UploadComponent() {
         />
 
         <label htmlFor="datepicker" style={labelStyle}>
-          Publish year: <span style={{ color: "#ED0A00" }}>*</span>
+          Year of Publication: <span style={{ color: "#ED0A00" }}>*</span>
         </label>
 
         <div style={{ width: "50%" }}>
@@ -153,7 +153,7 @@ export default function UploadComponent() {
         <br />
 
         <label htmlFor="publisher" style={labelStyle}>
-          Publisher:
+          Source:
         </label>
         <input
           type="text"
@@ -213,7 +213,7 @@ export default function UploadComponent() {
         />
 
         <label htmlFor="abstract" style={labelStyle}>
-          Abstract: <span style={{ color: "#ED0A00" }}>*</span>
+        Summary (in 30 words): <span style={{ color: "#ED0A00" }}>*</span>
           <br />
         </label>
         <textarea

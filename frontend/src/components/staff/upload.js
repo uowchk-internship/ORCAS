@@ -121,13 +121,13 @@ export default function UploadComponent() {
       url !== "" &&
       abstract !== "") {
       setSubmittable(true)
-    }else{
+    } else {
       setSubmittable(false)
     }
 
   })
 
-  
+
 
 
 
@@ -187,7 +187,7 @@ export default function UploadComponent() {
           onChange={(e) => setAuthor(e.target.value)}
         />
 
-        <label style={labelStyle} htmlFor="datepicker">Publish year: <span style={{ color: "#ED0A00" }}>*</span></label>
+        <label style={labelStyle} htmlFor="datepicker">Year of Publication: <span style={{ color: "#ED0A00" }}>*</span></label>
 
         <div style={{ width: "50%" }}>
           <Datetime
@@ -199,7 +199,7 @@ export default function UploadComponent() {
           />
         </div><br />
 
-        <label style={labelStyle} htmlFor="publisher">Publisher:</label>
+        <label style={labelStyle} htmlFor="publisher">Source:</label>
         <input type="text" id="publisher"
           value={publisher}
           onChange={(e) => setPublisher(e.target.value)}
@@ -235,7 +235,7 @@ export default function UploadComponent() {
 
 
         <label style={labelStyle} htmlFor="abstract">
-          Abstract: <span style={{ color: "#ED0A00" }}>*</span><br />
+          Summary (in 30 words): <span style={{ color: "#ED0A00" }}>*</span><br />
         </label>
         <textarea id="abstract" rows="4"
           value={abstract}
