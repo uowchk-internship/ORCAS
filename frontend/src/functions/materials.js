@@ -44,6 +44,27 @@ export const getAllMaterials = async () => {
     return result
 }
 
+export const getRandomMaterials = async (kind) => {
+    let url = `https://tomcat.johnnyip.com/orcas/api/material/random/${kind}`
+
+    let result = [];
+    await axios.get(url)
+        .then((response) => {
+            if (response.status == 200) {
+                result = response.data
+            } else {
+                result = []
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            result = []
+        })
+
+    return result
+}
+
+
 
 
 export const addViewCount = async (id) => {

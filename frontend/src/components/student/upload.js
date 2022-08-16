@@ -203,7 +203,8 @@ export default function UploadComponent() {
         <label htmlFor="link" style={labelStyle}>
           Link: <span style={{ color: "#ED0A00" }}>*</span>
           <br />
-          Your link must include "https://" or "http://" at the beginning.
+          Your link must include "https://" or "http://" at the beginning.<br/>
+          For youtube video, it must starts with "https://www.youtube.com/watch?v="
         </label>
         <input
           type="text"

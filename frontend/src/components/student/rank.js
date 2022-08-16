@@ -93,11 +93,11 @@ export default function RankComponent() {
           verticalAlign: "top",
         }}
       >
-        <table>
+        <table style={{ textAlign: "center" }}>
           <thead>
             <tr>
               <td>Rank</td>
-              <td>Student Email</td>
+              <td style={{ width: "60%" }}>Student Email</td>
               <td>Quantity</td>
             </tr>
           </thead>
@@ -122,11 +122,11 @@ export default function RankComponent() {
           verticalAlign: "top",
         }}
       >
-        <table>
+        <table style={{ textAlign: "center" }}>
           <thead>
             <tr>
               <td>Rank</td>
-              <td>Student Email</td>
+              <td style={{ width: "60%" }}>Student Email</td>
               <td>Quantity</td>
             </tr>
           </thead>
@@ -143,7 +143,7 @@ export default function RankComponent() {
       </div>
 
       <div className="popup">
-        <a onClick={() => {setShowPopup(true)}}>Click me</a> to check the rewards of top 3 students
+        <a onClick={() => { setShowPopup(true) }}>Click me</a> to check the rewards of top 3 students
         <span className="popuptext" id="myPopup">
           you have got the rewards! congrad!
         </span>
@@ -154,7 +154,7 @@ export default function RankComponent() {
         onClose={() => setShowPopup(false)}
         title="Rewards: "
       >
-        
+
         <Rankpopup />
       </Modal>
 

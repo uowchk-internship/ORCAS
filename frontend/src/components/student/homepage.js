@@ -1,4 +1,25 @@
+import { useState, useEffect } from 'react'
+import { getRandomMaterials } from "../../functions/materials";
+
+import SearchItem from '../student/searchItem'
+
 export default function HomeComponent() {
+    const [randomArticle, setRandomArticle] = useState({})
+    const [randomVideo, setRandomVideo] = useState({})
+    const [loaded, setLoaded] = useState(false)
+
+    useEffect(() => {
+        const fetchMaterials = async () => {
+            setRandomArticle(await getRandomMaterials("Article"))
+            setRandomVideo(await getRandomMaterials("Video"))
+            console.log(await getRandomMaterials("Video"))
+            setLoaded(true)
+        }
+
+        if (!loaded) {
+            fetchMaterials();
+        }
+    })
     return (
         <>
             <section className="page-content grid-container uw-text-block">
@@ -25,7 +46,26 @@ export default function HomeComponent() {
             </section>
 
             <section className="page-content grid-container uw-text-block">
-                
+                <table>
+                    <thead>
+                        <tr>
+                            <td>A featured article randomly chosen from the database</td>
+                            <td>A featured video randomly chosen from the database</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr valign="top">
+                            <td>
+                                <SearchItem preview={false} data={randomArticle} />
+                            </td>
+                            <td>
+                                <SearchItem preview={false} data={randomVideo} />
+                                <iframe width="560" height="315" src={`https://www.youtube.com/embed/${randomVideo.url.split("v=")[1]}`}
+                                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
 
