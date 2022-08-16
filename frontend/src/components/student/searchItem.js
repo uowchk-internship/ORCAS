@@ -8,6 +8,9 @@ export default function SearchItem(props) {
     let preview = props.preview
 
     const [showAbstract, setShowAbstract] = useState(false)
+    const [subjects, setSubjects] = useState(data.subject !== undefined ? data.subject.split(',').map((item, i) => {
+        return (<span key={i}>{item}{(i === data.subject.split(',').length - 1) ? "" : ", "}</span>)
+    }) : [])
 
     return (
         <>
@@ -20,7 +23,7 @@ export default function SearchItem(props) {
                     <tr>
                         <td>
                             <b>{data.type}</b> | Year of Publish: <b>{data.publishYear}</b> | Views: <b>{data.views}</b><br />
-                            <b>{data.subject}</b>
+                            <b>{subjects}</b>
                         </td>
                         <td>
                             <Group>
