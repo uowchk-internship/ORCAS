@@ -1,5 +1,6 @@
 import { Chips, Chip, createStyles, Image, Accordion, Group } from '@mantine/core';
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 import { getWithKeywordsAndStatus } from '../../functions/materials'
 import SearchItem from './searchItem'
@@ -22,7 +23,9 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 
 
 export default function Search() {
+    const router = useRouter()
     const { classes } = useStyles();
+    const [initLoaded, setInitLoaded] = useState(false)
 
     const [submitted, setSubmitted] = useState(true);
 
@@ -122,6 +125,12 @@ export default function Search() {
     }
 
     useEffect(() => {
+        
+        if (!initLoaded && Object.keys(router.query).length !== 0 ) {
+            fetchMaterials(router.query.query)
+            setKeyword(router.query.query)
+            setInitLoaded(true)    
+        }
 
         if (submitted) {
             fetchMaterials("")
