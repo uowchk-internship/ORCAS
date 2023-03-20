@@ -55,6 +55,11 @@ public class MaterialController {
         return materialServices.findByKeywordAndStatus(keyword,status);
     }
 
+    @GetMapping("/random/{kind}")
+    public Material getRandomMaterialOfKind(@PathVariable String kind){
+        return materialServices.getRandomMaterialOfKind(kind);
+    }
+
 
 
 }

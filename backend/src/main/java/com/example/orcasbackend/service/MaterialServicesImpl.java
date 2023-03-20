@@ -60,4 +60,9 @@ public class MaterialServicesImpl implements MaterialServices{
         materialDAOService.deleteById(id);
     }
 
+    @Override
+    @Transactional
+    public Material getRandomMaterialOfKind(String kind){
+        return materialDAOService.getRandomMaterialOfKind(kind);
+    }
 }

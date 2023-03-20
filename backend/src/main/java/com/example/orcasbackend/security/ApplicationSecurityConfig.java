@@ -55,7 +55,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll() //Permits your preflight request
-                .antMatchers("/api/admin/**").hasRole(ADMIN.name())
+                .antMatchers("/api/admin/**", "/api/email/**").hasRole(ADMIN.name())
                 .anyRequest()
                 .authenticated();
 

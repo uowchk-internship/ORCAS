@@ -20,4 +20,6 @@ public interface MaterialDAO {
 
     public void deleteById(String id);
 
+    public Material getRandomMaterialOfKind(String kind);
+
 }
