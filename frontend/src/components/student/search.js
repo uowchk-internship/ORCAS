@@ -125,11 +125,11 @@ export default function Search() {
     }
 
     useEffect(() => {
-        
-        if (!initLoaded && Object.keys(router.query).length !== 0 ) {
+
+        if (!initLoaded && Object.keys(router.query).length !== 0) {
             fetchMaterials(router.query.query)
             setKeyword(router.query.query)
-            setInitLoaded(true)    
+            setInitLoaded(true)
         }
 
         if (submitted) {
@@ -146,7 +146,7 @@ export default function Search() {
         <>
             <section id="search-bar" >
                 <div id="search-container">
-                    <input value={keyword} onChange={ async (e) => {
+                    <input value={keyword} onChange={async (e) => {
                         setKeyword(e.target.value);
                         await fetchMaterials(e.target.value);
                     }}

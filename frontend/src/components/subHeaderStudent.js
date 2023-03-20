@@ -117,6 +117,7 @@ export default function SubHeader(props) {
           <div className="page-navigator__list page-navigator__list--pages">
             <div className="page-navigator__list--pages--wrapper">
               <p className="page-navigator__title">ORCAS</p>
+              <p className="page-navigator__title">URL:{process.env.SERVER_URL}</p>
               <ul className="no-bullet">
                 <li>
                   <span className={location === "/" ? "currentbranch0" : ""} >
