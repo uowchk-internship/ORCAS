@@ -2,7 +2,7 @@ const axios = require('axios');
 
 export const sendEmail = async (data) => {
     let result = ""
-    let url = `https://tomcat.johnnyip.com/orcas/api/email/send`
+    let url = `https://${process.env.SERVER_URL}/api/email/send`
     await axios.post(url, data)
         .then((response) => {
             if (response.status == 200) {
