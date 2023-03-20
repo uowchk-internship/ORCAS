@@ -6,6 +6,6 @@ RUN npm install
 COPY . .
 EXPOSE 3000
 ARG SERVER_URL
-ENV SERVER_URL=
+ENV SERVER_URL=""
 RUN npm run build
 CMD ["npm","start"]

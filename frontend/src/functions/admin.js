@@ -5,7 +5,7 @@ import { saveJWT, getJWT } from './cookies';
 
 export const removeMaterial = async (id) => {
     let result = ""
-    let url = `https://${process.env.SERVER_URL}/api/admin/delete/${id}`
+    let url = `${process.env.SERVER_URL}/api/admin/delete/${id}`
     await axios.get(url)
         .then((response) => {
             if (response.status == 200) {
@@ -23,7 +23,7 @@ export const removeMaterial = async (id) => {
 
 export const saveMaterial = async (data) => {
     let result = ""
-    let url = `https://${process.env.SERVER_URL}/api/admin/update`
+    let url = `${process.env.SERVER_URL}/api/admin/update`
     await axios.post(url, data)
         .then((response) => {
             if (response.status == 200) {
@@ -48,7 +48,7 @@ export const login = async (username, password) => {
 
     axios.defaults.headers.common['Authorization'] = ""
 
-    let url = `https://${process.env.SERVER_URL}/login`
+    let url = `${process.env.SERVER_URL}/login`
     await axios.post(url, body)
         .then((response) => {
             if (response.status == 200) {
@@ -77,7 +77,7 @@ export const checkLoginStatus = async () => {
      axios.defaults.headers.common['Authorization'] = JWTFromCookie
 
     let result = false
-    let url = `https://${process.env.SERVER_URL}/api/admin/check`
+    let url = `${process.env.SERVER_URL}/api/admin/check`
     await axios.get(url)
         .then((response) => {
             if (response.status == 200) {

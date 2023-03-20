@@ -2,7 +2,7 @@ const axios = require('axios');
 
 export const getMonths = async () => {
 
-    let url = `https://${process.env.SERVER_URL}/api/ranking/allRankings`
+    let url = `${process.env.SERVER_URL}/api/ranking/allRankings`
 
     let result = [];
     await axios.get(url)
