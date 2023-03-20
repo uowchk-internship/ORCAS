@@ -20,7 +20,6 @@ services:
       - SERVER_USERNAME=root
       - SERVER_PASSWORD=root
 
-
   db:
     image: mysql
     restart: always
