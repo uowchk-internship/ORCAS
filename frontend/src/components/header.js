@@ -61,8 +61,7 @@ const Header = () => {
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
             />
-            <script async defer data-website-id="5e025439-b54d-4003-908f-4ea2c09be8f7" src="https://analytics.johnnyip.com/umami.js"></script>
-            {/* <link
+            <script async src="https://analytics.johnnyip.com/script.js" data-website-id="5e025439-b54d-4003-908f-4ea2c09be8f7"></script>            {/* <link
                 rel="stylesheet"
                 type="text/css"
                 media="all"
